@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Set;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
@@ -29,13 +30,13 @@ public class EventBE {
     private UserBE hostUser;
 
     @Column(name = "start_date")
-    private String startDate;
+    private Timestamp startDate;
 
     @Column(name = "end_date")
-    private String endDate;
+    private Timestamp endDate;
 
     @Column(name = "guests")
-    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.ALL})
     private Set<UserBE> guestList;
 
     @ManyToMany

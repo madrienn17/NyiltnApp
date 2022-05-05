@@ -12,9 +12,6 @@ import javax.annotation.Resource;
 
 import java.util.Optional;
 
-import static com.edu.nyiltnappbackend.helper.MyResponseEntity.buildErrorMessage;
-import static com.edu.nyiltnappbackend.helper.MyResponseEntity.buildSuccessMessage;
-
 @Service
 public class UserService {
 

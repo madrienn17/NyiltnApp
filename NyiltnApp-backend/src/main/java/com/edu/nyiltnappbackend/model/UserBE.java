@@ -40,13 +40,10 @@ public class UserBE {
     @ToString.Exclude
     private String password;
 
+    @Column(columnDefinition = "varchar(255) default 'USER' ")
     private String role;
 
     @ToString.Exclude
     private String token;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private EventBE event;
 }
 

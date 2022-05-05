@@ -1,0 +1,31 @@
+<p-toast position="top-right"></p-toast>
+<p-table [columns]="cols" [value]="registrations">
+  <ng-template pTemplate="caption">
+    Registrations List
+  </ng-template>
+
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+
+  <<ng-template pTemplate="body"  let-regi>
+  <tr>
+    <td> {{ regi.name }} </td>
+    <td> {{ regi.mobileNumber }} </td>
+    <td> {{ regi.email }} </td>
+    <td> {{ regi.date }} </td>
+    <td> {{ regi.schoolName }} </td>
+  </tr>
+</ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="5">No registrations found.</td>
+    </tr>
+  </ng-template>
+
+</p-table>

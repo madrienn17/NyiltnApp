@@ -1,0 +1,67 @@
+<p-toast position="top-right"></p-toast>
+<div class="col-md-12">
+  <div class="card card-container">
+    <h1>Register to open days event series</h1>
+    <form
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          class="form-control"
+          name="username"
+          [(ngModel)]="form.user"
+          required
+        />
+        <label for="firstName">First Name</label>
+        <input
+          id="firstName"
+          type="text"
+          class="form-control"
+          name="firstName"
+          [(ngModel)]="form.firstName"
+          required
+        />
+
+        <label for="lastName">Last Name</label>
+        <input
+          id="lastName"
+          type="text"
+          class="form-control"
+          name="lastName"
+          [(ngModel)]="form.lastName"
+          required
+        />
+
+        <label for="mobileNumber">Mobile number</label>
+        <input
+          id="mobileNumber"
+          type="text"
+          class="form-control"
+          name="mobileNumber"
+          [(ngModel)]="form.mobileNumber"
+          required
+        />
+
+        <label for="schoolName" translate>School</label>
+        <br>
+        <p-dropdown id="schoolName" [options]="schools"
+                    optionLabel="label"
+                    placeholder="Select the school"
+                    [optionValue]="schools.name"
+                    [(ngModel)]="form.schoolName"
+                    [showClear]="true"
+                    [ngModelOptions]="{standalone: true}">
+        </p-dropdown>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block bg-dark">Register</button>
+      </div>
+    </form>
+  </div>
+</div>

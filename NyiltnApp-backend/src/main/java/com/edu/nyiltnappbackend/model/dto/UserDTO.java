@@ -29,8 +29,5 @@ public class UserDTO extends RepresentationModel<UserDTO> {
 
     @ToString.Exclude
     private String token;
-
-    @ToString.Exclude
-    private EventBE event;
 }
 

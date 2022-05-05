@@ -24,6 +24,9 @@ public class LocationBE {
     @Column(name = "location_id")
     private Long locationId;
 
+    @Column(name = "city_name")
+    private String cityName;
+
     @Column(name = "street_name")
     private String streetName;
 
@@ -35,8 +38,4 @@ public class LocationBE {
 
     @Column(name = "lng")
     private double lngCoord;
-
-    @ManyToMany(mappedBy = "locations", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<EventBE> events;
 }
