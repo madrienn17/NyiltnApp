@@ -24,8 +24,8 @@ public class RegistrationBE {
     @SequenceGenerator(name = "registrations_gen", sequenceName = "registrations_seq", allocationSize = 1)
     @ToString.Exclude
     @EqualsAndHashCode.Include
-    @Column(name = "registration_id")
-    private Long registrationId;
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne
     private UserBE registeredUser;
@@ -36,7 +36,7 @@ public class RegistrationBE {
     @ManyToOne
     private SchoolBE school;
 
-    @OneToMany
-    private Set<EventBE> events;
+    @ManyToOne
+    private EventBE event;
 
 }

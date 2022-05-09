@@ -20,8 +20,8 @@ public class SchoolBE {
     @SequenceGenerator(name = "schools_gen", sequenceName = "schools_seq", allocationSize = 1)
     @ToString.Exclude
     @EqualsAndHashCode.Include
-    @Column(name = "school_id")
-    private Long schoolId;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "county_code")
     private String countyCode;

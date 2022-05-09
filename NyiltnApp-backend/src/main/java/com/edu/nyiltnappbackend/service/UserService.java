@@ -24,7 +24,11 @@ public class UserService {
      * @param userDto user's info
      * @return the saved user
      */
-    public UserDTO register(UserDTO userDto) {
+    public UserDTO register(UserDTO userDto) throws ServiceException {
+        Optional<UserBE> userFind = userRepository.findByUsername(userDto.getUsername());
+        if (userFind.isPresent()) {
+            throw new ServiceException("Username already taken!");
+        }
         UserBE savedUser = userRepository.save(DTOConverters.convertDTOToUserBE(userDto));
         return DTOConverters.convertUserBEToDTO(savedUser);
     }

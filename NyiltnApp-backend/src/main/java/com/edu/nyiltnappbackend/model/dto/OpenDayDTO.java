@@ -1,11 +1,12 @@
 package com.edu.nyiltnappbackend.model.dto;
 
 import com.edu.nyiltnappbackend.model.EventBE;
-import com.edu.nyiltnappbackend.model.UserBE;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.sql.Timestamp;
+import java.time.Year;
+import java.util.Set;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Data
@@ -14,13 +15,13 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class RegistrationDTO extends RepresentationModel<RegistrationDTO> {
+public class OpenDayDTO extends RepresentationModel<OpenDayDTO> {
+    private Year year;
 
-    private UserDTO registeredUser;
+    private Timestamp startDate;
 
-    private Timestamp registrationDate;
+    private Timestamp endDate;
 
-    private String schoolName;
-
-    private EventDTO event;
+    @ToString.Exclude
+    private Set<EventDTO> events;
 }

@@ -23,22 +23,30 @@ public class EventBE {
     @SequenceGenerator(name = "events_gen", sequenceName = "events_seq", allocationSize = 1)
     @ToString.Exclude
     @EqualsAndHashCode.Include
-    @Column(name = "event_id")
-    private Long eventId;
+    @Column(name = "id")
+    private Long id;
+
+    @ManyToOne
+    private EventMetaBE eventMeta;
 
     @ManyToOne
     private UserBE hostUser;
 
-    @Column(name = "start_date")
-    private Timestamp startDate;
+    @Column(name = "start_time")
+    private Timestamp startTime;
 
-    @Column(name = "end_date")
-    private Timestamp endDate;
+    @Column(name = "end_time")
+    private Timestamp endTime;
 
-    @Column(name = "guests")
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.ALL})
-    private Set<UserBE> guestList;
+    @Column(name = "max_attendee_nr")
+    private Integer maxAttendeeNr;
+
+    @Column(name = "link")
+    private String link;
+
+    @ManyToOne
+    private LocationBE location;
 
     @ManyToMany
-    private Set<LocationBE> locations;
+    private Set<UserBE> presentators;
 }

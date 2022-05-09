@@ -21,8 +21,8 @@ public class LocationBE {
     @SequenceGenerator(name = "locations_gen", sequenceName = "locations_seq", allocationSize = 1)
     @ToString.Exclude
     @EqualsAndHashCode.Include
-    @Column(name = "location_id")
-    private Long locationId;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "city_name")
     private String cityName;
@@ -38,4 +38,8 @@ public class LocationBE {
 
     @Column(name = "lng")
     private double lngCoord;
+
+    @Column(name = "classroom")
+    private String classroom;
+
 }

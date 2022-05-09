@@ -21,8 +21,8 @@ public class UserBE {
     @SequenceGenerator(name = "users_gen", sequenceName = "users_seq", allocationSize = 1)
     @ToString.Exclude
     @EqualsAndHashCode.Include
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "first_name")
     private String firstName;

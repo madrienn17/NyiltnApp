@@ -32,17 +32,10 @@ public class RegistrationService {
     public RegistrationDTO add(RegistrationDTO registrationDTO) throws ServiceException {
         RegistrationBE registrationToSave = new RegistrationBE();
 
-        Optional<UserBE> userBE = userRepository.findByUsername(registrationDTO.getUser().getUsername());
+        Optional<UserBE> userBE = userRepository.findByUsername(registrationDTO.getRegisteredUser().getUsername());
         if (userBE.isEmpty()) {
             throw new ServiceException("No such user registered!");
         }
-        UserBE user = userBE.get();
-
-        user.setFirstName(registrationDTO.getUser().getFirstName());
-        user.setLastName(registrationDTO.getUser().getLastName());
-        user.setMobileNumber(registrationDTO.getUser().getMobileNumber());
-
-        userRepository.save(user);
 
         registrationToSave.setRegisteredUser(userBE.get());
 

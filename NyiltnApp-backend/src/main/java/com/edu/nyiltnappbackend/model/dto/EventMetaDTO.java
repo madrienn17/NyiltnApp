@@ -1,9 +1,7 @@
 package com.edu.nyiltnappbackend.model.dto;
 
-
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
-
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Data
@@ -11,16 +9,9 @@ import org.springframework.hateoas.RepresentationModel;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class LocationDTO extends RepresentationModel<LocationDTO> {
-    private String cityName;
 
-    private String streetName;
+public class EventMetaDTO extends RepresentationModel<EventMetaDTO> {
+    private String name;
 
-    private int streetNumber;
-
-    private double latCoord;
-
-    private double lngCoord;
-
-    private String classroom;
+    private String description;
 }

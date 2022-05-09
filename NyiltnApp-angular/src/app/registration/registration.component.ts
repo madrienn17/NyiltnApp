@@ -12,10 +12,7 @@ export class RegistrationComponent implements OnInit {
   schools: any;
   form: any = {
     user: null,
-    schoolName: null,
-    firstName: null,
-    lastName: null,
-    mobileNumber: null,
+    schoolName: null
   };
 
   registration: Registration = {} as Registration

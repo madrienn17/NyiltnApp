@@ -65,31 +65,25 @@ public class DTOConverters {
      */
     public static EventBE convertDTOToEventBE(EventDTO eventDTO) {
         return EventBE.builder()
-                .endDate(eventDTO.getEndDate())
-                .startDate(eventDTO.getStartDate())
-                .endDate(eventDTO.getEndDate())
+                .startTime(eventDTO.getStartTime())
+                .endTime(eventDTO.getEndTime())
                 .hostUser(convertDTOToUserBE(eventDTO.getHostUser()))
-                .guestList(eventDTO.getGuestList()
+                .presentators(eventDTO.getPresentators()
                         .stream().map(DTOConverters::convertDTOToUserBE)
                         .collect(Collectors.toSet()))
-                .locations(eventDTO.getLocations()
-                        .stream().map(DTOConverters::convertDTOToLocationBE)
-                        .collect(Collectors.toSet()))
+                .location(convertDTOToLocationBE(eventDTO.getLocation()))
                 .build();
     }
 
     public static EventDTO convertEventBEToDTO(EventBE eventBE) {
         return EventDTO.builder()
-                .endDate(eventBE.getEndDate())
-                .startDate(eventBE.getStartDate())
-                .endDate(eventBE.getEndDate())
-                .hostUser(convertUserBEToDTO(eventBE.getHostUser()))
-                .guestList(eventBE.getGuestList()
+                .startTime(eventBE.getStartTime())
+                .endTime(eventBE.getEndTime())
+                .hostUser(DTOConverters.convertUserBEToDTO(eventBE.getHostUser()))
+                .presentators(eventBE.getPresentators()
                         .stream().map(DTOConverters::convertUserBEToDTO)
                         .collect(Collectors.toSet()))
-                .locations(eventBE.getLocations()
-                        .stream().map(DTOConverters::convertLocationBEToDTO)
-                        .collect(Collectors.toSet()))
+                .location(convertLocationBEToDTO(eventBE.getLocation()))
                 .build();
     }
 
@@ -120,7 +114,7 @@ public class DTOConverters {
 
     public static RegistrationDTO convertRegistrationBEToDTO(RegistrationBE registrationBE) {
        return RegistrationDTO.builder()
-               .user(convertUserBEToDTO(registrationBE.getRegisteredUser()))
+               .registeredUser(convertUserBEToDTO(registrationBE.getRegisteredUser()))
                .schoolName(convertSchoolBEToDTO(registrationBE.getSchool()).getSchoolName())
                .build();
     }

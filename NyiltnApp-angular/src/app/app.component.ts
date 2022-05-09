@@ -11,7 +11,7 @@ import {TokenStorageService} from "./_services/token-storage.service";
 export class AppComponent {
   title = 'NyiltnApp-angular';
 
-  private roles: string = '';
+  private role: string = '';
   isLoggedIn = false;
   isAdmin = false;
   username?: string;
@@ -24,7 +24,7 @@ export class AppComponent {
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.roles = user.role;
+      this.role = user.role;
       this.username = user.username;
     }
   }
