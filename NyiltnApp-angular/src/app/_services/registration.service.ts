@@ -26,4 +26,8 @@ export class RegistrationService {
   getRegistrations() {
     return this.http.get(baseUrl + "/list")
   }
+
+  getSchoolNames() {
+    return this.http.get(baseUrl + "/schools")
+  }
 }

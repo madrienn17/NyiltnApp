@@ -18,6 +18,9 @@ public class RegistrationController {
     @Autowired
     private RegistrationService registrationService;
 
+    @Autowired
+    private SchoolService schoolService;
+
     @PostMapping("")
     public MyResponseEntity<?> add(@RequestBody RegistrationDTO registrationDTO) {
         try {
@@ -30,6 +33,11 @@ public class RegistrationController {
     @GetMapping("/list")
     public MyResponseEntity<?> getAll() {
         return buildSuccessMessage(registrationService.getAll());
+    }
+
+    @GetMapping("/schools")
+    public MyResponseEntity<?> findSchoolNamesOrderedByNameDescending() {
+        return buildSuccessMessage(schoolService.findAllOrderedByNameDescending());
     }
 
 }

@@ -20,11 +20,15 @@ export class RegistrationComponent implements OnInit {
   constructor(private registrationService: RegistrationService, private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.schools = [
-      {label: "Petru Maior Elmeleti Liceum", value: "PMEL"},
-      {label: "Bolyai Farkas Elmeleti Liceum", value: "BFEL"},
-      {label: "Lucian Blaga Technologiai Liceum", value: "LBTL"},
-    ];
+    this.registrationService.getSchoolNames().subscribe((response: any) => {
+      console.log(response)
+      this.schools = response.data;
+    });
+    // this.schools = [
+    //   {label: "Petru Maior Elmeleti Liceum", value: "PMEL"},
+    //   {label: "Bolyai Farkas Elmeleti Liceum", value: "BFEL"},
+    //   {label: "Lucian Blaga Technologiai Liceum", value: "LBTL"},
+    // ];
   }
 
   onSubmit() {

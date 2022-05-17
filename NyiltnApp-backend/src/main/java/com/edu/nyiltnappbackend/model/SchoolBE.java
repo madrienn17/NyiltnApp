@@ -13,6 +13,9 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedQuery(name = "SchoolBE.findAllOrderedByNameDescending",
+    query = "SELECT s.schoolName FROM SchoolBE s ORDER BY s.schoolName asc")
+
 public class SchoolBE {
     @Id
     @JsonIgnore
