@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Registration} from "../_models/registration";
 import {RegistrationService} from "../_services/registration.service";
 import {MessageService} from "primeng/api";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -15,11 +16,20 @@ export class RegistrationComponent implements OnInit {
     schoolName: null
   };
 
+  eventId: number | null = {} as number;
+
   registration: Registration = {} as Registration
 
-  constructor(private registrationService: RegistrationService, private messageService: MessageService) { }
+  constructor(private registrationService: RegistrationService,
+              private messageService: MessageService,
+              private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      // @ts-ignore
+      this.eventId = +params.get('id');
+      console.log(this.eventId)
+    });
     this.registrationService.getSchoolNames().subscribe((response: any) => {
       console.log(response)
       this.schools = response.data;

@@ -34,6 +34,7 @@ import {MenuModule} from "primeng/menu";
 import {PanelModule} from "primeng/panel";
 import {MessageService} from "primeng/api";
 import { RegistrationListComponent } from './registration-list/registration-list.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RegistrationListComponent } from './registration-list/registration-list
     RegisterComponent,
     HomeComponent,
     RegistrationComponent,
-    RegistrationListComponent
+    RegistrationListComponent,
+    EventListComponent
   ],
   imports: [
     BrowserModule,

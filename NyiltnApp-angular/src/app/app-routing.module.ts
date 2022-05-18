@@ -5,12 +5,14 @@ import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {RegistrationComponent} from "./registration/registration.component";
 import {RegistrationListComponent} from "./registration-list/registration-list.component";
+import {EventListComponent} from "./event-list/event-list.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'registration', component: RegistrationComponent },
+  { path: 'event-list', component: EventListComponent},
+  { path: 'registration/:id', component: RegistrationComponent },
   { path: 'registrationlist', component: RegistrationListComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

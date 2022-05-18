@@ -1,7 +1,8 @@
 package com.edu.nyiltnappbackend.model.dto;
 
 import lombok.*;
-import org.springframework.hateoas.RepresentationModel;
+
+import java.util.Set;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Data
@@ -9,9 +10,13 @@ import org.springframework.hateoas.RepresentationModel;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+public class EventMainDTO {
+    private Long id;
 
-public class EventMetaDTO extends RepresentationModel<EventMetaDTO> {
     private String name;
 
     private String description;
+
+    // the event objects which have the event_meta_id = id
+    private Set<EventDTO> eventList;
 }

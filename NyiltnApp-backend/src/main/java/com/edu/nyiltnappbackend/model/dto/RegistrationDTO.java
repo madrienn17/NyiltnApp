@@ -1,7 +1,5 @@
 package com.edu.nyiltnappbackend.model.dto;
 
-import com.edu.nyiltnappbackend.model.EventBE;
-import com.edu.nyiltnappbackend.model.UserBE;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 

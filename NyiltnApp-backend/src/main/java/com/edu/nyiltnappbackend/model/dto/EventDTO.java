@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 
 public class EventDTO extends RepresentationModel<EventDTO> {
+    private Long id;
 
     private UserDTO hostUser;
 
@@ -30,7 +31,4 @@ public class EventDTO extends RepresentationModel<EventDTO> {
     private Set<UserDTO> presentators;
 
     private LocationDTO location;
-
-    private EventMetaDTO eventMeta;
-
 }

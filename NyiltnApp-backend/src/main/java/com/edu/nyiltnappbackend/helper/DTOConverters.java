@@ -3,6 +3,7 @@ package com.edu.nyiltnappbackend.helper;
 import com.edu.nyiltnappbackend.model.*;
 import com.edu.nyiltnappbackend.model.dto.*;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -68,23 +69,32 @@ public class DTOConverters {
                 .startTime(eventDTO.getStartTime())
                 .endTime(eventDTO.getEndTime())
                 .hostUser(convertDTOToUserBE(eventDTO.getHostUser()))
+                .maxAttendeeNr(eventDTO.getMaxAttendeeNr())
                 .presentators(eventDTO.getPresentators()
                         .stream().map(DTOConverters::convertDTOToUserBE)
                         .collect(Collectors.toSet()))
-                .location(convertDTOToLocationBE(eventDTO.getLocation()))
+//                .location(convertDTOToLocationBE(eventDTO.getLocation()))
                 .build();
     }
 
     public static EventDTO convertEventBEToDTO(EventBE eventBE) {
         return EventDTO.builder()
+                .id(eventBE.getId())
                 .startTime(eventBE.getStartTime())
                 .endTime(eventBE.getEndTime())
                 .hostUser(DTOConverters.convertUserBEToDTO(eventBE.getHostUser()))
+                .maxAttendeeNr(eventBE.getMaxAttendeeNr())
                 .presentators(eventBE.getPresentators()
                         .stream().map(DTOConverters::convertUserBEToDTO)
                         .collect(Collectors.toSet()))
-                .location(convertLocationBEToDTO(eventBE.getLocation()))
+//                .location(convertLocationBEToDTO(eventBE.getLocation()))
                 .build();
+    }
+
+    public static Set<EventDTO> convertEventSetToDTO(Set<EventBE> eventBESet) {
+        return eventBESet
+                .stream().map(DTOConverters::convertEventBEToDTO)
+                .collect(Collectors.toSet());
     }
 
     /**
