@@ -35,6 +35,7 @@ import {PanelModule} from "primeng/panel";
 import {MessageService} from "primeng/api";
 import { RegistrationListComponent } from './registration-list/registration-list.component';
 import { EventListComponent } from './event-list/event-list.component';
+import { EventNewComponent } from './event-new/event-new.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EventListComponent } from './event-list/event-list.component';
     HomeComponent,
     RegistrationComponent,
     RegistrationListComponent,
-    EventListComponent
+    EventListComponent,
+    EventNewComponent
   ],
   imports: [
     BrowserModule,

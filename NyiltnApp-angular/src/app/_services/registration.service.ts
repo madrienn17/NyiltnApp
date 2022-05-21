@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Registration} from "../_models/registration";
+import {User} from "../_models/User";
 
 const baseUrl = 'http://localhost:8080/api/registration';
 const httpOptions = {
@@ -29,5 +30,10 @@ export class RegistrationService {
 
   getSchoolNames() {
     return this.http.get(baseUrl + "/schools")
+  }
+
+  isLoggedInUserRegisteredToEvent(eventId: number) {
+    let user: User = JSON.parse(window.sessionStorage.getItem('auth-user') as string);
+    return this.http.get(`${baseUrl}/isUserRegistered/${eventId}/${user.username}`)
   }
 }

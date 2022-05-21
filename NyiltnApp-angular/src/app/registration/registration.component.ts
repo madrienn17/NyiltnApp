@@ -3,6 +3,7 @@ import {Registration} from "../_models/registration";
 import {RegistrationService} from "../_services/registration.service";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
+import {User} from "../_models/User";
 
 @Component({
   selector: 'app-registration',
@@ -12,11 +13,10 @@ import {ActivatedRoute} from "@angular/router";
 export class RegistrationComponent implements OnInit {
   schools: any;
   form: any = {
-    user: null,
     schoolName: null
   };
 
-  eventId: number | null = {} as number;
+  eventId: number = {} as number;
 
   registration: Registration = {} as Registration
 
@@ -34,40 +34,29 @@ export class RegistrationComponent implements OnInit {
       console.log(response)
       this.schools = response.data;
     });
-    // this.schools = [
-    //   {label: "Petru Maior Elmeleti Liceum", value: "PMEL"},
-    //   {label: "Bolyai Farkas Elmeleti Liceum", value: "BFEL"},
-    //   {label: "Lucian Blaga Technologiai Liceum", value: "LBTL"},
-    // ];
   }
 
   onSubmit() {
     this.form.schoolName = this.form.schoolName.label
-    const user = {
-      firstName: this.form.firstName,
-      lastName: this.form.lastName,
-      mobileNumber: this.form.mobileNumber,
-      email: "string",
-      username: this.form.user,
-      password: "string",
-      role: "string",
-      token: "string"
-    }
+    const user:string = window.sessionStorage.getItem('auth-user') as unknown as string
 
     this.registration = {
-      user: user,
-      schoolName: this.form.schoolName
+      user: JSON.parse(user),
+      schoolName: this.form.schoolName,
+      eventId: this.eventId
     }
 
     console.log(this.registration)
 
-    this.registrationService.addRegistration(this.registration).subscribe((data: any) => {
-      console.log(data)
-      if (!data.success) {
-        this.messageService.add({severity: 'error', summary: 'Error!', detail: data.message})
+    this.registrationService.addRegistration(this.registration).subscribe((response:any) => {
+      console.log(response)
+      if (!response.success) {
+        this.messageService.add({severity: 'error', summary: 'Error!', detail: response.message})
       } else {
         this.messageService.add({severity: 'success', summary: 'Success!', detail: "Registration successfully sent"})
       }
+    }, error => {
+      this.messageService.add({severity: 'error', summary: 'Error!', detail: error.message})
     })
 
   }

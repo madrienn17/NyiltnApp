@@ -6,6 +6,7 @@ import com.edu.nyiltnappbackend.helper.ServiceException;
 import com.edu.nyiltnappbackend.model.UserBE;
 import com.edu.nyiltnappbackend.model.dto.UserDTO;
 import com.edu.nyiltnappbackend.repository.IUserRepository;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -63,5 +64,13 @@ public class UserService {
      */
     public UserDTO updateUserToken(UserBE user) {
         return DTOConverters.convertUserBEToDTO(userRepository.save(user));
+    }
+
+    public UserDTO getUserByUsername(String username) throws ServiceException {
+        Optional<UserBE> user = userRepository.findByUsername(username);
+        if (user.isEmpty()) {
+            throw new ServiceException("No such user registered!");
+        }
+        return DTOConverters.convertUserBEToDTO(user.get());
     }
 }

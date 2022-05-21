@@ -34,8 +34,4 @@ public class SchoolBE {
 
     @Column(name = "short_name")
     private String shortName;
-
-    @ManyToOne
-    private LocationBE location;
-
 }

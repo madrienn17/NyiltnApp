@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 const API_URL = 'http://localhost:8080/api/user/';
 
@@ -10,4 +11,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getUserByUsername(username: string): Observable<any> {
+    return this.http.get<any>(API_URL + username)
+  }
 }

@@ -2,13 +2,16 @@ package com.edu.nyiltnappbackend.service;
 
 import com.edu.nyiltnappbackend.helper.DTOConverters;
 import com.edu.nyiltnappbackend.helper.ServiceException;
+import com.edu.nyiltnappbackend.model.EventBE;
 import com.edu.nyiltnappbackend.model.RegistrationBE;
 import com.edu.nyiltnappbackend.model.SchoolBE;
 import com.edu.nyiltnappbackend.model.UserBE;
 import com.edu.nyiltnappbackend.model.dto.RegistrationDTO;
+import com.edu.nyiltnappbackend.repository.IEventRepository;
 import com.edu.nyiltnappbackend.repository.IRegistrationRepository;
 import com.edu.nyiltnappbackend.repository.ISchoolRepository;
 import com.edu.nyiltnappbackend.repository.IUserRepository;
+import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,10 +32,13 @@ public class RegistrationService {
     @Resource
     private ISchoolRepository schoolRepository;
 
+    @Resource
+    private IEventRepository eventRepository;
+
     public RegistrationDTO add(RegistrationDTO registrationDTO) throws ServiceException {
         RegistrationBE registrationToSave = new RegistrationBE();
 
-        Optional<UserBE> userBE = userRepository.findByUsername(registrationDTO.getRegisteredUser().getUsername());
+        Optional<UserBE> userBE = userRepository.findByUsername(registrationDTO.getUser().getUsername());
         if (userBE.isEmpty()) {
             throw new ServiceException("No such user registered!");
         }
@@ -47,6 +53,16 @@ public class RegistrationService {
         }
         registrationToSave.setSchool(schoolBE.get());
 
+        Optional<EventBE> eventBE = eventRepository.findEventBEById(registrationDTO.getEventId());
+        if (eventBE.isEmpty()) {
+            throw new ServiceException("No such event!");
+        }
+        registrationToSave.setEvent(eventBE.get());
+
+        if (isUserRegisteredToEvent(eventBE.get().getId(), userBE.get().getUsername())) {
+            throw new ServiceException("User Already registered!");
+        }
+
         return  DTOConverters.convertRegistrationBEToDTO(registrationRepository.save(registrationToSave));
     }
 
@@ -54,4 +70,8 @@ public class RegistrationService {
         return registrationRepository.findAll();
     }
 
+    public boolean isUserRegisteredToEvent(Long eventId, String username) {
+        Optional<RegistrationBE> registrationBE = registrationRepository.isUserRegisteredToEvent(eventId, username);
+        return registrationBE.isPresent();
+    }
 }

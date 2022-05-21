@@ -14,11 +14,9 @@ import java.sql.Timestamp;
 
 public class RegistrationDTO extends RepresentationModel<RegistrationDTO> {
 
-    private UserDTO registeredUser;
-
-    private Timestamp registrationDate;
+    private UserDTO user;
 
     private String schoolName;
 
-    private EventDTO event;
+    private Long eventId;
 }

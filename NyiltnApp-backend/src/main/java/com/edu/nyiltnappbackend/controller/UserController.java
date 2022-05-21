@@ -49,4 +49,13 @@ public class UserController {
             return buildErrorMessage(e.getMessage());
         }
     }
+
+    @GetMapping("/{username}")
+    public MyResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        try {
+            return buildSuccessMessage(userService.getUserByUsername(username));
+        } catch (ServiceException e) {
+            return buildErrorMessage(e.getMessage());
+        }
+    }
 }

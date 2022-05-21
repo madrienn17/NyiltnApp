@@ -3,5 +3,5 @@
   latCoord: number;
   lngCoord: number;
   streetName: string;
-  streetNumber: number;
+  streetNumber: string;
 }

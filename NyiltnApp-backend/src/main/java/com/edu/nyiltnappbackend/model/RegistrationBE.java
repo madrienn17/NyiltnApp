@@ -5,8 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Set;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
@@ -16,6 +14,9 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
+@NamedQuery(name = "RegistrationBE.isUserRegisteredToEvent",
+        query = "SELECT r FROM RegistrationBE r WHERE r.event.id=:eventId and r.registeredUser.username=:username")
 public class RegistrationBE {
 
     @Id

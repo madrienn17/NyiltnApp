@@ -3,4 +3,5 @@
 export interface Registration {
   schoolName: string;
   user: User;
+  eventId: number;
 }

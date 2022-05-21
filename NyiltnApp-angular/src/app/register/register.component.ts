@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../_services/auth.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-register',
@@ -20,19 +21,26 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private message: MessageService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    // const { username, email, password } = this.form;
     const user = this.form
+    // explicitly setting the default role as USER
+    user.role = "USER"
     this.authService.register(user).subscribe(
-      data => {
+      (data:any) => {
         console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
+        if (data.success) {
+          this.isSuccessful = true;
+          this.isSignUpFailed = false;
+        } else {
+          this.message.add({severity: 'error', summary: 'Error!', detail: data.message})
+        }
+
       },
       err => {
         this.errorMessage = err.error.message;

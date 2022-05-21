@@ -2,7 +2,7 @@ package com.edu.nyiltnappbackend.model.dto;
 
 import lombok.*;
 
-import java.util.Set;
+import java.util.List;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Data
@@ -18,5 +18,5 @@ public class EventMainDTO {
     private String description;
 
     // the event objects which have the event_meta_id = id
-    private Set<EventDTO> eventList;
+    private List<EventDTO> eventList;
 }

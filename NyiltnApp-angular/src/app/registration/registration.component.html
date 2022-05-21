@@ -1,7 +1,7 @@
 <p-toast position="top-right"></p-toast>
 <div class="col-md-12">
   <div class="card card-container">
-    <h1>Register to open days event series</h1>
+    <h1>Register to event </h1>
     <form
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
@@ -9,16 +9,6 @@
       novalidate
     >
       <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.user"
-          required
-        />
-
         <label for="schoolName" translate>School</label>
         <br>
         <p-dropdown id="schoolName" [options]="schools"

@@ -3,6 +3,7 @@ package com.edu.nyiltnappbackend.helper;
 import com.edu.nyiltnappbackend.model.*;
 import com.edu.nyiltnappbackend.model.dto.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,9 @@ public class DTOConverters {
      * Location converters
      */
     public static LocationBE convertDTOToLocationBE(LocationDTO locationDTO) {
+        if (locationDTO == null) {
+            return null;
+        }
         return LocationBE.builder()
                 .cityName(locationDTO.getCityName())
                 .latCoord(locationDTO.getLatCoord())
@@ -52,6 +56,9 @@ public class DTOConverters {
     }
 
     public static LocationDTO convertLocationBEToDTO(LocationBE locationBE) {
+        if (locationBE == null) {
+            return null;
+        }
         return LocationDTO.builder()
                 .cityName(locationBE.getCityName())
                 .latCoord(locationBE.getLatCoord())
@@ -73,7 +80,7 @@ public class DTOConverters {
                 .presentators(eventDTO.getPresentators()
                         .stream().map(DTOConverters::convertDTOToUserBE)
                         .collect(Collectors.toSet()))
-//                .location(convertDTOToLocationBE(eventDTO.getLocation()))
+                .location(convertDTOToLocationBE(eventDTO.getLocation()))
                 .build();
     }
 
@@ -87,14 +94,14 @@ public class DTOConverters {
                 .presentators(eventBE.getPresentators()
                         .stream().map(DTOConverters::convertUserBEToDTO)
                         .collect(Collectors.toSet()))
-//                .location(convertLocationBEToDTO(eventBE.getLocation()))
+                .location(convertLocationBEToDTO(eventBE.getLocation()))
                 .build();
     }
 
-    public static Set<EventDTO> convertEventSetToDTO(Set<EventBE> eventBESet) {
-        return eventBESet
+    public static List<EventDTO> convertEventListToDTO(List<EventBE> eventBEList) {
+        return eventBEList
                 .stream().map(DTOConverters::convertEventBEToDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**
@@ -105,7 +112,6 @@ public class DTOConverters {
                 .countyCode(schoolBE.getCountyCode())
                 .schoolName(schoolBE.getSchoolName())
                 .shortName(schoolBE.getShortName())
-                .location(convertLocationBEToDTO(schoolBE.getLocation()))
                 .build();
     }
 
@@ -114,7 +120,6 @@ public class DTOConverters {
                 .countyCode(schoolDTO.getCountyCode())
                 .schoolName(schoolDTO.getSchoolName())
                 .shortName(schoolDTO.getShortName())
-                .location(convertDTOToLocationBE(schoolDTO.getLocation()))
                 .build();
     }
 
@@ -124,8 +129,9 @@ public class DTOConverters {
 
     public static RegistrationDTO convertRegistrationBEToDTO(RegistrationBE registrationBE) {
        return RegistrationDTO.builder()
-               .registeredUser(convertUserBEToDTO(registrationBE.getRegisteredUser()))
+               .user(convertUserBEToDTO(registrationBE.getRegisteredUser()))
                .schoolName(convertSchoolBEToDTO(registrationBE.getSchool()).getSchoolName())
+               .eventId(registrationBE.getEvent().getId())
                .build();
     }
 

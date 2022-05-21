@@ -16,6 +16,4 @@ public class SchoolDTO extends RepresentationModel<SchoolDTO> {
     private String schoolName;
 
     private String shortName;
-
-    private LocationDTO location;
 }

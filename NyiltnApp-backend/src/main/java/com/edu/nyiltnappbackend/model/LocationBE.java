@@ -31,7 +31,7 @@ public class LocationBE {
     private String streetName;
 
     @Column(name = "street_number")
-    private int streetNumber;
+    private String streetNumber;
 
     @Column(name = "lat")
     private double latCoord;

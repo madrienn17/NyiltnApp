@@ -16,7 +16,7 @@ public class LocationDTO extends RepresentationModel<LocationDTO> {
 
     private String streetName;
 
-    private int streetNumber;
+    private String streetNumber;
 
     private double latCoord;
 

@@ -3,7 +3,8 @@
 <div class="card">
   <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
-      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="addNewEventMeta()"></button>
+      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+              (click)="showAddEventMetaDialog()"></button>
     </ng-template>
   </p-toolbar>
 
@@ -37,7 +38,7 @@
                                 <th pSortableColumn="startTime">Start <p-sortIcon field="startTime"></p-sortIcon></th>
                                 <th pSortableColumn="endTime">End <p-sortIcon field="endTime"></p-sortIcon></th>
                                 <th pSortableColumn="maxAttendeeNr">Limit <p-sortIcon field="maxAttendeeNr"></p-sortIcon></th>
-                                <th style="width: 4rem"></th>
+                                <th *ngIf="!isAdmin" style="width: 4rem">Join</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-event>
@@ -46,21 +47,140 @@
                                 <td>{{event.startTime}}</td>
                                 <td>{{event.endTime}}</td>
                                 <td>{{event.maxAttendeeNr}}</td>
-                                <td>
+                                <td *ngIf="!isAdmin">
                                   <button pButton pRipple icon="pi pi-plus" class="p-button-success mr-2"
+                                          [disabled]="getRegisteredBoolean(event.id)"
                                           (click)="handlePlus(event.id)"></button>
                                 </td>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="6">There are no order for this product yet.</td>
+                                <td colspan="6">There are no event added yet.</td>
                             </tr>
                         </ng-template>
                     </p-table>
+                    <ng-container *ngIf="isAdmin">
+                    <br>
+                    <div style="align-content: center;  justify-content: center;  display: flex;">
+                      <button pRipple pButton icon="pi pi-plus" class="p-button-success mr-2 "
+                      (click)="showAddEventDialog()"></button>
+                    </div>
+                   </ng-container>
                 </div>
             </td>
         </tr>
     </ng-template>
 </p-table>
 </div>
+
+
+<!-- DIALOG FOR ADDING NEW EVENT-->
+<p-dialog [(visible)]="eventCreate && isAdmin" [style]="{width: '450px'}" header="New event"
+          [modal]="true" styleClass="p-fluid" [closable]="false" [closeOnEscape]="false">
+  <form name="addEventForm"
+        #f="ngForm"
+        novalidate>
+    <div class="p-field">
+      <label for="hostUser">Host username</label>
+      <input id="hostUser" type="text" pInputText name="hostUser" [(ngModel)]="addEventForm.hostUser" class="form-control" required>
+    </div>
+    <div class="p-field">
+      <label for="startTime">Start time</label>
+      <p-calendar id="startTime" [(ngModel)]="addEventForm.startTime" name="startTime"
+                  [showTime]="true"
+                  class="form-control" [showIcon]="true"></p-calendar>
+    </div>
+    <div class="p-field">
+      <label for="endTime">End time</label>
+      <p-calendar id="endTime" [(ngModel)]="addEventForm.endTime" name="endTime"
+                  [showTime]="true"
+                  class="form-control" [showIcon]="true"></p-calendar>
+    </div>
+    <div class="p-field">
+      <label for="maxAttendeeNr">maxAttendeeNr</label>
+      <input id="maxAttendeeNr" type="number" pInputText name="maxAttendeeNr" #maxAttendeeNr="ngModel" class="form-control"
+             [(ngModel)]="addEventForm.maxAttendeeNr" required>
+    </div>
+    <div class="p-field">
+      <label for="link">Meet link</label>
+      <input id="link" type="text" pInputText name="link" class="form-control"
+             [(ngModel)]="addEventForm.link">
+    </div>
+    <h3>Location</h3>
+    <div class="p-field">
+      <label for="cityName">City</label>
+      <input id="cityName" type="text" pInputText name="cityName" class="form-control"
+             [(ngModel)]="addEventForm.location.cityName">
+    </div>
+    <div class="p-field">
+    <label for="streetName">Street name</label>
+    <input id="streetName" type="text" pInputText name="streetName" class="form-control"
+           [(ngModel)]="addEventForm.location.streetName">
+    </div>
+    <div class="p-field">
+    <label for="streetNumber">Street number</label>
+    <input id="streetNumber" type="text" pInputText name="streetNumber" class="form-control"
+           [(ngModel)]="addEventForm.location.streetNumber">
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="latCoord">Lat coord</label>
+        <input id="latCoord" name="latCoord" step="0.01" class="form-control" type="number"
+               [(ngModel)]="addEventForm.location.latCoord">
+      </div>
+      <div class="col">
+        <label for="lngCoord">Lng coord</label>
+        <input id="lngCoord" name="lngCoord" step="0.01" class="form-control" type="number"
+               [(ngModel)]="addEventForm.location.lngCoord">
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <!-- FOOTER-->
+    <div class="row">
+      <div class="col">
+        <button class="form-control p-button-warning" pButton type="button" label="Cancel"
+                icon="pi pi-times" (click)="closeAddEvent()"></button>
+      </div>
+      <div class="col">
+        <button class="form-control p-button-success" pButton [disabled]="f.form.invalid" type="submit"
+                label="Save" icon="pi pi-check"
+                (click)="addEventButton()"></button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+
+<!--DIALOG FOR ADDING NEW EVENT META-->
+<p-dialog [(visible)]="eventMetaCreate && isAdmin" [style]="{width: '450px'}" header="New event-meta"
+          [modal]="true" styleClass="p-fluid" [closable]="false" [closeOnEscape]="false">
+  <form name="addEventForm"
+        #ff="ngForm"
+        novalidate>
+    <div class="p-field">
+      <label for="title">Title</label>
+      <input id="title" type="text" pInputText name="title" [(ngModel)]="addEventMetaForm.name"
+             class="form-control" required>
+      <label for="description">Description</label>
+      <textarea pInputTextarea id="description" type="textarea" pInputText name="description" [(ngModel)]="addEventMetaForm.description"
+                class="form-control" required></textarea>
+    </div>
+    <br>
+    <!-- FOOTER-->
+    <div class="row">
+      <div class="col">
+        <button class="form-control p-button-warning" pButton type="button" label="Cancel"
+                icon="pi pi-times" (click)="closeAddEventMeta()"></button>
+      </div>
+      <div class="col">
+        <button class="form-control p-button-success" pButton [disabled]="ff.form.invalid" type="submit"
+                label="Save" icon="pi pi-check"
+                (click)="addEventMetaButton()"></button>
+      </div>
+    </div>
+  </form>
+</p-dialog>

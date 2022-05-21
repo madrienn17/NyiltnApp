@@ -1,5 +1,6 @@
 ﻿import {User} from "./User";
 import {Timestamp} from "rxjs";
+import {Location} from "./location";
 
 export interface Event {
   id: number;
