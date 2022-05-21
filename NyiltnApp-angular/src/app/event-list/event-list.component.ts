@@ -8,8 +8,6 @@ import {TokenStorageService} from "../_services/token-storage.service";
 import {UserService} from "../_services/user.service";
 import {MessageService} from "primeng/api";
 import {User} from "../_models/User";
-import {waitForAsync} from "@angular/core/testing";
-import {delay} from "rxjs";
 
 @Component({
   selector: 'app-event-list',
@@ -48,6 +46,8 @@ export class EventListComponent implements OnInit {
     description: ''
   };
 
+  userRegisteredEvents: number[] = [];
+
   constructor(private eventService: EventService,
               private registrationService: RegistrationService,
               private tokenStorageService: TokenStorageService,
@@ -64,6 +64,19 @@ export class EventListComponent implements OnInit {
       this.events = e.data;
       console.log(this.events)
     })
+
+    this.registrationService.getEventRegisteredByUsername(this.tokenStorageService.getUser().username).subscribe(
+      (resp:any)=> {
+        console.log(resp)
+        if (resp.success) {
+          this.userRegisteredEvents = resp.data;
+        } else {
+          this.messageService.add({severity: 'error', summary: 'Error!', detail: resp.message})
+        }
+    }, error => {
+        this.messageService.add({severity: 'error', summary: 'Error!', detail: error.message})
+      })
+
   }
 
   addNewEventMeta() {
@@ -77,8 +90,7 @@ export class EventListComponent implements OnInit {
   }
 
   getRegisteredBoolean(eventId: number) {
-    // const res =  this.registrationService.isLoggedInUserRegisteredToEvent(eventId).toPromise()
-    //  return res;
+    return this.userRegisteredEvents.includes(eventId)
   }
 
   closeAddEvent() {

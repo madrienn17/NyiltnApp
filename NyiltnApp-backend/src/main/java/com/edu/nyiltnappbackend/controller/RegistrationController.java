@@ -46,4 +46,9 @@ public class RegistrationController {
         return buildSuccessMessage(registrationService.isUserRegisteredToEvent(eventId, username));
     }
 
+    @GetMapping("/{username}")
+    public MyResponseEntity<?> getAllRegisteredEventIdsForUser(@PathVariable String username) {
+        return buildSuccessMessage(registrationService.getAllRegisteredEventIdsForUser(username));
+    }
+
 }

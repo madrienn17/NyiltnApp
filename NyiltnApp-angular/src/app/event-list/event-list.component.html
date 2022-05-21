@@ -3,7 +3,7 @@
 <div class="card">
   <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
-      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+      <button *ngIf="isAdmin" pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
               (click)="showAddEventMetaDialog()"></button>
     </ng-template>
   </p-toolbar>

@@ -36,4 +36,8 @@ export class RegistrationService {
     let user: User = JSON.parse(window.sessionStorage.getItem('auth-user') as string);
     return this.http.get(`${baseUrl}/isUserRegistered/${eventId}/${user.username}`)
   }
+
+  getEventRegisteredByUsername(username: string) {
+    return this.http.get(baseUrl + `/${username}`)
+  }
 }

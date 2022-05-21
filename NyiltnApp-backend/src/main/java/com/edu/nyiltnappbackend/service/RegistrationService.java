@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -73,5 +74,10 @@ public class RegistrationService {
     public boolean isUserRegisteredToEvent(Long eventId, String username) {
         Optional<RegistrationBE> registrationBE = registrationRepository.isUserRegisteredToEvent(eventId, username);
         return registrationBE.isPresent();
+    }
+
+    public List<Long> getAllRegisteredEventIdsForUser(String username) {
+        Optional<List<Long>> eventIds = registrationRepository.getEventIdsByUsername(username);
+        return eventIds.orElseGet(ArrayList::new);
     }
 }
