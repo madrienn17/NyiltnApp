@@ -4,7 +4,8 @@ import {Location} from "./location";
 
 export interface Event {
   id: number;
-  hostUser: User;
+  hostUser: string;
+  eventMeta: number;
   startTime: Timestamp<any>;
   endTime: Timestamp<any>;
   maxAttendeeNr: number;

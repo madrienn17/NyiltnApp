@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {RegisterComponent} from "./register/register.component";
-import {LoginComponent} from "./login/login.component";
-import {HomeComponent} from "./home/home.component";
-import {RegistrationComponent} from "./registration/registration.component";
-import {RegistrationListComponent} from "./registration-list/registration-list.component";
-import {EventListComponent} from "./event-list/event-list.component";
-import {EventNewComponent} from "./event-new/event-new.component";
+import {HomeComponent} from "./_components/home/home.component";
+import {LoginComponent} from "./_components/login/login.component";
+import {RegisterComponent} from "./_components/register/register.component";
+import {EventListComponent} from "./_components/events/event-list/event-list.component";
+import {EventNewComponent} from "./_components/events/event-new/event-new.component";
+import {RegistrationComponent} from "./_components/events/registration/registration.component";
+import {RegistrationListComponent} from "./_components/events/registration-list/registration-list.component";
+import {EventDetailsComponent} from "./_components/events/event-details/event-details.component";
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'event-list', component: EventListComponent},
-  { path: 'event-new', component: EventNewComponent },
+  { path: 'event-new/:id', component: EventNewComponent },
+  { path: 'event-details/:id', component: EventDetailsComponent },
   { path: 'registration/:id', component: RegistrationComponent },
   { path: 'registrationlist', component: RegistrationListComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }

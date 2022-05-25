@@ -17,12 +17,20 @@ export class EventService {
 
   constructor(private http: HttpClient) { }
 
+  getById(id: number) {
+    return this.http.get(baseUrl + "/getById/" + id)
+  }
+
   getAll() {
     return this.http.get(baseUrl + "/getAll")
   }
 
   saveEvent(event: Event) {
     return this.http.post(baseUrl + '/save', event, httpOptions)
+  }
+
+  getMetaById(id: number) {
+    return this.http.get(baseUrl + "/meta/getById/" + id)
   }
 
   saveMeta(eventMeta: any) {

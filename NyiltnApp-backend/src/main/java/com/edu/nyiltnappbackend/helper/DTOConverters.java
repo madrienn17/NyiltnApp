@@ -4,7 +4,6 @@ import com.edu.nyiltnappbackend.model.*;
 import com.edu.nyiltnappbackend.model.dto.*;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -75,11 +74,12 @@ public class DTOConverters {
         return EventBE.builder()
                 .startTime(eventDTO.getStartTime())
                 .endTime(eventDTO.getEndTime())
-                .hostUser(convertDTOToUserBE(eventDTO.getHostUser()))
+//                .hostUser(convertDTOToUserBE(eventDTO.getHostUser()))
                 .maxAttendeeNr(eventDTO.getMaxAttendeeNr())
                 .presentators(eventDTO.getPresentators()
                         .stream().map(DTOConverters::convertDTOToUserBE)
                         .collect(Collectors.toSet()))
+                .link(eventDTO.getLink())
                 .location(convertDTOToLocationBE(eventDTO.getLocation()))
                 .build();
     }
@@ -89,11 +89,13 @@ public class DTOConverters {
                 .id(eventBE.getId())
                 .startTime(eventBE.getStartTime())
                 .endTime(eventBE.getEndTime())
-                .hostUser(DTOConverters.convertUserBEToDTO(eventBE.getHostUser()))
+                .hostUser(eventBE.getHostUser().getUsername())
                 .maxAttendeeNr(eventBE.getMaxAttendeeNr())
                 .presentators(eventBE.getPresentators()
                         .stream().map(DTOConverters::convertUserBEToDTO)
                         .collect(Collectors.toSet()))
+                .link(eventBE.getLink())
+                .eventMeta(eventBE.getEventMeta().getId())
                 .location(convertLocationBEToDTO(eventBE.getLocation()))
                 .build();
     }

@@ -44,7 +44,7 @@ public class EventBE {
     @Column(name = "link")
     private String link;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private LocationBE location;
 
     @ManyToMany

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {RegistrationService} from "../_services/registration.service";
-import {RegistrationFull} from "../_models/registration-full";
-import {RegistrationTable} from "../_models/registration-table";
-import {Timestamp} from "rxjs";
+import {RegistrationFull} from "../../../_models/registration-full";
+import {RegistrationTable} from "../../../_models/registration-table";
+import {RegistrationService} from "../../../_services/registration.service";
 
 @Component({
   selector: 'app-registration-list',

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Registration} from "../_models/registration";
-import {RegistrationService} from "../_services/registration.service";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute} from "@angular/router";
-import {User} from "../_models/User";
+import {Registration} from "../../../_models/registration";
+import {RegistrationService} from "../../../_services/registration.service";
 
 @Component({
   selector: 'app-registration',

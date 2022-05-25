@@ -17,7 +17,9 @@ import java.util.Set;
 public class EventDTO extends RepresentationModel<EventDTO> {
     private Long id;
 
-    private UserDTO hostUser;
+    private String hostUser;
+
+    private Long eventMeta;
 
     private Timestamp startTime;
 
