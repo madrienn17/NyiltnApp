@@ -8,17 +8,19 @@ import {EventNewComponent} from "./_components/events/event-new/event-new.compon
 import {RegistrationComponent} from "./_components/events/registration/registration.component";
 import {RegistrationListComponent} from "./_components/events/registration-list/registration-list.component";
 import {EventDetailsComponent} from "./_components/events/event-details/event-details.component";
+import {EventEditComponent} from "./_components/events/event-edit/event-edit.component";
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'event-list', component: EventListComponent},
+  { path: 'event-list', component: EventListComponent },
+  { path: 'event-edit/:id', component: EventEditComponent },
   { path: 'event-new/:id', component: EventNewComponent },
   { path: 'event-details/:id', component: EventDetailsComponent },
   { path: 'registration/:id', component: RegistrationComponent },
-  { path: 'registrationlist', component: RegistrationListComponent},
+  { path: 'registrationlist/:id', component: RegistrationListComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

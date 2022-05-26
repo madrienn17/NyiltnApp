@@ -80,6 +80,7 @@ public class DTOConverters {
                         .stream().map(DTOConverters::convertDTOToUserBE)
                         .collect(Collectors.toSet()))
                 .link(eventDTO.getLink())
+                .registeredNr(eventDTO.getRegisteredNr())
                 .location(convertDTOToLocationBE(eventDTO.getLocation()))
                 .build();
     }
@@ -96,6 +97,7 @@ public class DTOConverters {
                         .collect(Collectors.toSet()))
                 .link(eventBE.getLink())
                 .eventMeta(eventBE.getEventMeta().getId())
+                .registeredNr(eventBE.getRegisteredNr())
                 .location(convertLocationBEToDTO(eventBE.getLocation()))
                 .build();
     }

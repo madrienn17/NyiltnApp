@@ -39,6 +39,21 @@ public class RegistrationService {
     public RegistrationDTO add(RegistrationDTO registrationDTO) throws ServiceException {
         RegistrationBE registrationToSave = new RegistrationBE();
 
+        Optional<EventBE> eventBE = eventRepository.findEventBEById(registrationDTO.getEventId());
+        if (eventBE.isEmpty()) {
+            throw new ServiceException("No such event!");
+        }
+
+        EventBE event = eventBE.get();
+
+        if (event.getRegisteredNr() >= event.getMaxAttendeeNr()) {
+            throw new ServiceException("No more places available!");
+        }
+
+        event.setRegisteredNr(event.getRegisteredNr() + 1);
+
+        registrationToSave.setEvent(event);
+
         Optional<UserBE> userBE = userRepository.findByUsername(registrationDTO.getUser().getUsername());
         if (userBE.isEmpty()) {
             throw new ServiceException("No such user registered!");
@@ -54,12 +69,6 @@ public class RegistrationService {
         }
         registrationToSave.setSchool(schoolBE.get());
 
-        Optional<EventBE> eventBE = eventRepository.findEventBEById(registrationDTO.getEventId());
-        if (eventBE.isEmpty()) {
-            throw new ServiceException("No such event!");
-        }
-        registrationToSave.setEvent(eventBE.get());
-
         if (isUserRegisteredToEvent(eventBE.get().getId(), userBE.get().getUsername())) {
             throw new ServiceException("User Already registered!");
         }
@@ -67,8 +76,8 @@ public class RegistrationService {
         return  DTOConverters.convertRegistrationBEToDTO(registrationRepository.save(registrationToSave));
     }
 
-    public List<RegistrationBE> getAll() {
-        return registrationRepository.findAll();
+    public List<RegistrationBE> getByEventId(Long eventId) {
+        return registrationRepository.findByEvent_Id(eventId);
     }
 
     public boolean isUserRegisteredToEvent(Long eventId, String username) {

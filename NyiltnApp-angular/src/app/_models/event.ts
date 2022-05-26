@@ -9,6 +9,7 @@ export interface Event {
   startTime: Timestamp<any>;
   endTime: Timestamp<any>;
   maxAttendeeNr: number;
+  registeredNr: number;
   link: string;
   presentators: User[];
   location: Location;

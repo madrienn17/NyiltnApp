@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -56,6 +57,8 @@ public class EventService {
         Optional<EventMetaBE> meta = this.eventMetaRepository.findById(event.getEventMeta());
         EventBE eventToSave = DTOConverters.convertDTOToEventBE(event);
 
+        eventToSave.setRegisteredNr(0);
+
         if (host.isEmpty()) {
             throw new ServiceException("User invalid!");
         }
@@ -66,6 +69,40 @@ public class EventService {
         }
         eventToSave.setEventMeta(meta.get());
         return DTOConverters.convertEventBEToDTO(this.eventRepository.save(eventToSave));
+    }
+
+    public void delete(Long id) throws ServiceException {
+        if (this.eventRepository.findEventBEById(id).isEmpty()) {
+            throw new ServiceException("The object does not exist!");
+        }
+
+        this.eventRepository.deleteById(id);
+    }
+
+    public EventDTO update(Long id, EventDTO event) throws ServiceException {
+        EventBE eventToUpdate = this.eventRepository.getById(id);
+
+        Optional<UserBE> host = this.userRepository.findByUsername(event.getHostUser());
+        Optional<EventMetaBE> meta = this.eventMetaRepository.findById(event.getEventMeta());
+
+        if (host.isEmpty()) {
+            throw new ServiceException("User invalid!");
+        }
+        eventToUpdate.setHostUser(host.get());
+
+        if (meta.isEmpty()) {
+            throw new ServiceException("Event meta invalid!");
+        }
+        eventToUpdate.setEventMeta(meta.get());
+
+        eventToUpdate.setStartTime(event.getStartTime());
+        eventToUpdate.setEndTime(event.getEndTime());
+        eventToUpdate.setMaxAttendeeNr(event.getMaxAttendeeNr());
+        eventToUpdate.setRegisteredNr(event.getRegisteredNr());
+        eventToUpdate.setLink(event.getLink());
+        eventToUpdate.setLocation(DTOConverters.convertDTOToLocationBE(event.getLocation()));
+
+        return DTOConverters.convertEventBEToDTO(this.eventRepository.save(eventToUpdate));
     }
 
     public EventMetaBE addEventMeta(EventMetaBE eventMeta) {
@@ -79,4 +116,5 @@ public class EventService {
         }
         return eventMeta.get();
     }
+
 }

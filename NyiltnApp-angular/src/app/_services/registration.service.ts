@@ -24,8 +24,8 @@ export class RegistrationService {
     return this.http.post(baseUrl, body, httpOptions)
   }
 
-  getRegistrations() {
-    return this.http.get(baseUrl + "/list")
+  getRegistrations(eventId: number) {
+    return this.http.get(`${baseUrl}/registrations/${eventId}`)
   }
 
   getSchoolNames() {

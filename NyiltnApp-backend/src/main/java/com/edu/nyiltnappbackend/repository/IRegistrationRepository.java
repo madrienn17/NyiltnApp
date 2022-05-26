@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface IRegistrationRepository extends JpaRepository<RegistrationBE, Long> {
     Optional<RegistrationBE> isUserRegisteredToEvent(Long eventId, String username);
     Optional<List<Long>> getEventIdsByUsername(String username);
+    List<RegistrationBE> findByEvent_Id(Long eventId);
 }

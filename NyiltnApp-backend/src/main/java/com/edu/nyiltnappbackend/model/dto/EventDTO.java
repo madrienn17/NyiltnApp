@@ -27,6 +27,8 @@ public class EventDTO extends RepresentationModel<EventDTO> {
 
     private Integer maxAttendeeNr;
 
+    private Integer registeredNr;
+
     private String link;
 
     @ToString.Exclude

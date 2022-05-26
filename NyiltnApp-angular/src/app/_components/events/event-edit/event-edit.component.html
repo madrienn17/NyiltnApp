@@ -1,35 +1,35 @@
 <div>
-  <form name="eventDetailForm"
+  <form name="eventEditForm"
         class="row g-3"
+        #f="ngForm"
         novalidate>
-    <h3>Event details</h3>
+    <h3>Edit event</h3>
     <div class="col-4">
       <div class="control-group">
         <label class="control-label" for="hostUser">Host username</label>
         <input id="hostUser" type="text" pInputText name="hostUser"
-               disabled
                [defaultValue]="currentEvent.hostUser"
                class="form-control">
       </div>
     </div>
     <div class="col-md-4">
       <label class="control-label" for="startTime">Start Time</label>
-      <input id="startTime" type="text" pInputText name="startTime" class="form-control" disabled
+      <input id="startTime" type="text" pInputText name="startTime" class="form-control"
              [defaultValue]="currentEvent.startTime | date: 'yyyy.MM.dd HH:mm'">
     </div>
     <div class="col-md-4">
-    <label class="control-label" for="endTime">End Time</label>
-    <input id="endTime" type="text" pInputText name="endTime" class="form-control" disabled
-           [defaultValue]="currentEvent.endTime | date: 'yyyy.MM.dd HH:mm'">
+      <label class="control-label" for="endTime">End Time</label>
+      <input id="endTime" type="text" pInputText name="endTime" class="form-control"
+             [defaultValue]="currentEvent.endTime | date: 'yyyy.MM.dd HH:mm'">
     </div>
     <div class="col-md-6">
       <label class="control-label" for="maxAttendeeNr">Limit</label>
       <input id="maxAttendeeNr" type="number" pInputText name="maxAttendeeNr" class="form-control"
-             [defaultValue]="currentEvent.maxAttendeeNr" disabled>
+             [defaultValue]="currentEvent.maxAttendeeNr">
     </div>
     <div class="col-md-6">
       <label class="control-label" for="link">Meet link</label>
-      <input id="link" type="text" pInputText name="link" class="form-control" disabled
+      <input id="link" type="text" pInputText name="link" class="form-control"
              [defaultValue]="currentEvent.link">
     </div>
     <div class="col-md-12">
@@ -39,36 +39,36 @@
       <div class="control-group">
         <label class="control-label" for="cityName">City</label>
         <input id="cityName" type="text" pInputText name="cityName" class="form-control"
-               [defaultValue]="currentEvent.location.cityName" disabled>
+               [defaultValue]="currentEvent.location.cityName">
       </div>
     </div>
     <div class="col-md-6">
       <label class="control-label" for="streetName">Street name</label>
       <input id="streetName" type="text" pInputText name="streetName" class="form-control"
-             [defaultValue]="currentEvent.location.streetName" disabled>
+             [defaultValue]="currentEvent.location.streetName">
     </div>
     <div class="col-md-2">
       <label class="control-label" for="streetNumber">Street number</label>
       <input id="streetNumber" type="text" pInputText name="streetNumber" class="form-control"
-             [defaultValue]="currentEvent.location.streetNumber" disabled>
+             [defaultValue]="currentEvent.location.streetNumber">
     </div>
 
     <div class="col-md-2">
       <label class="control-label" for="latCoord">Lat coord</label>
       <input id="latCoord" name="latCoord" step="0.01" class="form-control" type="number"
-             [defaultValue]="currentEvent.location.latCoord" disabled>
+             [defaultValue]="currentEvent.location.latCoord">
     </div>
     <div class="col-md-2">
       <label class="control-label" for="lngCoord">Lng coord</label>
       <input id="lngCoord" name="lngCoord" step="0.01" class="form-control" type="number"
-             [defaultValue]="currentEvent.location.lngCoord" disabled>
+             [defaultValue]="currentEvent.location.lngCoord">
     </div>
 
     <div class="col-md-12">
-    <label for="description">Description</label>
-    <textarea pInputTextarea id="description" disabled type="textarea" pInputText name="description"
-              [defaultValue]="eventmeta.description"
-              class="form-control" required></textarea>
+      <label for="description">Description</label>
+      <textarea pInputTextarea id="description" type="textarea" pInputText name="description"
+                [defaultValue]="eventmeta.description"
+                class="form-control" required></textarea>
     </div>
     <br>
     <br>
@@ -81,6 +81,10 @@
               icon="pi pi-arrow-left" (click)="backToList()"></button>
     </div>
     <div class="col-md-6">
+      <button class="form-control p-button-success" pButton [disabled]="f.form.invalid" type="submit"
+              label="Save" icon="pi pi-check"
+              style="width: fit-content"
+              (click)="updateEventButton()"></button>
     </div>
   </form>
 </div>

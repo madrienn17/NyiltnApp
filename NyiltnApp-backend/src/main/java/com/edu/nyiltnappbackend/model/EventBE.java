@@ -41,6 +41,9 @@ public class EventBE {
     @Column(name = "max_attendee_nr")
     private Integer maxAttendeeNr;
 
+    @Column(name = "registered_nr")
+    private Integer registeredNr;
+
     @Column(name = "link")
     private String link;
 

@@ -26,6 +26,9 @@ export class EventListComponent implements OnInit {
   };
 
   userRegisteredEvents: number[] = [];
+  eventDeleteVisible: boolean = false;
+
+  eventIdToDelete: number = 0;
 
   constructor(private eventService: EventService,
               private registrationService: RegistrationService,
@@ -68,9 +71,7 @@ export class EventListComponent implements OnInit {
     return this.userRegisteredEvents.includes(eventId)
   }
 
-  showAddEventMetaDialog() {
-    this.eventMetaCreate = true;
-  }
+
 
   addEventMetaButton() {
     console.log(this.addEventMetaForm)
@@ -85,7 +86,35 @@ export class EventListComponent implements OnInit {
     })
   }
 
+  onDeleteEventButton() {
+    this.eventService.deleteEvent(this.eventIdToDelete).subscribe((response: any) => {
+      if (response.success) {
+        this.messageService.add({severity: 'success', summary: 'Success', detail: "Event successfully deleted!"})
+        this.closeDeleteEvent();
+      } else {
+        this.messageService.add({severity: 'error', summary: 'Error', detail: "Event was not deleted!"})
+      }
+    }, error => {
+      this.messageService.add({severity: 'error', summary: 'Error!', detail: error.message})
+    });
+  }
+
+  showAddEventMetaDialog() {
+    this.eventMetaCreate = true;
+  }
+
   closeAddEventMeta() {
     this.eventMetaCreate = false
   }
+
+  closeDeleteEvent() {
+    this.eventDeleteVisible = false;
+  }
+
+  showDeleteEventDialog(id: number) {
+    this.eventIdToDelete = id;
+    this.eventDeleteVisible = true;
+  }
+
+
 }

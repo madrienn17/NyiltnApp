@@ -30,9 +30,9 @@ public class RegistrationController {
         }
     }
 
-    @GetMapping("/list")
-    public MyResponseEntity<?> getAll() {
-        return buildSuccessMessage(registrationService.getAll());
+    @GetMapping("/registrations/{id}")
+    public MyResponseEntity<?> getByEventId(@PathVariable Long id) {
+        return buildSuccessMessage(registrationService.getByEventId(id));
     }
 
     @GetMapping("/schools")

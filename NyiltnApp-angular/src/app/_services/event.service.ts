@@ -18,22 +18,30 @@ export class EventService {
   constructor(private http: HttpClient) { }
 
   getById(id: number) {
-    return this.http.get(baseUrl + "/getById/" + id)
+    return this.http.get(`${baseUrl}/${id}`)
   }
 
   getAll() {
-    return this.http.get(baseUrl + "/getAll")
+    return this.http.get(baseUrl)
   }
 
   saveEvent(event: Event) {
-    return this.http.post(baseUrl + '/save', event, httpOptions)
+    return this.http.post(baseUrl, event, httpOptions)
+  }
+
+  deleteEvent(id: number) {
+    return this.http.delete(`${baseUrl}/${id}`)
+  }
+
+  updateEvent(id: number, event: Event) {
+    return this.http.put(`${baseUrl}/${id}`, event, httpOptions)
   }
 
   getMetaById(id: number) {
-    return this.http.get(baseUrl + "/meta/getById/" + id)
+    return this.http.get(baseUrl + "/meta/" + id)
   }
 
   saveMeta(eventMeta: any) {
-    return this.http.post(baseUrl + "/meta/save", eventMeta, httpOptions)
+    return this.http.post(baseUrl + "/meta", eventMeta, httpOptions)
   }
 }

@@ -17,7 +17,7 @@
     <td> {{ regi.name }} </td>
     <td> {{ regi.mobileNumber }} </td>
     <td> {{ regi.email }} </td>
-    <td> {{ regi.date }} </td>
+    <td> {{ regi.date | date: 'yyyy.MM.dd HH:mm' }} </td>
     <td> {{ regi.schoolName }} </td>
   </tr>
 </ng-template>
@@ -29,3 +29,14 @@
   </ng-template>
 
 </p-table>
+
+<br>
+<br>
+<!-- FOOTER-->
+<div class="col-md-6">
+  <button class="form-control p-button-warning" pButton type="button" label="Back"
+          style="width: fit-content"
+          icon="pi pi-arrow-left" (click)="backToList()"></button>
+</div>
+<div class="col-md-6">
+</div>

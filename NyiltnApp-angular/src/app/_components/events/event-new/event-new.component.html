@@ -8,7 +8,8 @@
     <div class="col-4">
     <div class="control-group">
       <label class="control-label" for="hostUser">Host username</label>
-      <input id="hostUser" type="text" pInputText name="hostUser" [(ngModel)]="addEventForm.hostUser" class="form-control" required>
+      <input id="hostUser" type="text" pInputText name="hostUser" [(ngModel)]="addEventForm.hostUser"
+             class="form-control" required>
     </div>
     </div>
     <div class="col-md-4">
@@ -19,13 +20,14 @@
                   [showTime]="true" id="startTime"
                   name="startTime"
                   ariaLabelledBy="stLabel"
+                  pInputText
                   inputStyleClass="form-control"
       ></p-calendar>
     </div>
     <div class="col-md-4">
       <label class="control-label" id="etLabel">End time</label>
       <br>
-      <p-calendar id="endTime" [(ngModel)]="addEventForm.endTime" name="endTime"
+      <p-calendar id="endTime" pInputText [(ngModel)]="addEventForm.endTime" name="endTime"
                   [monthNavigator]="true"
                   inputStyleClass="form-control"
                   ariaLabelledBy="etLabel"
@@ -34,12 +36,15 @@
     </div>
     <div class="col-md-6">
       <label class="control-label" for="maxAttendeeNr">maxAttendeeNr</label>
-      <input id="maxAttendeeNr" type="number" pInputText name="maxAttendeeNr" #maxAttendeeNr="ngModel" class="form-control"
+      <input id="maxAttendeeNr" type="number" min="0"
+             pInputText name="maxAttendeeNr" class="form-control"
              [(ngModel)]="addEventForm.maxAttendeeNr" required>
     </div>
     <div class="col-md-6">
       <label class="control-label" for="link">Meet link</label>
-      <input id="link" type="text" pInputText name="link" class="form-control"
+      <input id="link" type="text" pInputText name="link"
+             class="form-control"
+             required
              [(ngModel)]="addEventForm.link">
     </div>
     <div class="col-md-12">
@@ -48,19 +53,19 @@
     <div class="col-md-12">
     <div class="control-group">
       <label class="control-label" for="cityName">City</label>
-      <input id="cityName" type="text" pInputText name="cityName" class="form-control"
+      <input id="cityName" type="text" pInputText name="cityName" required class="form-control"
              [(ngModel)]="addEventForm.location.cityName">
     </div>
     </div>
     <div class="col-md-6">
       <label class="control-label" for="streetName">Street name</label>
-      <input id="streetName" type="text" pInputText name="streetName" class="form-control"
+      <input id="streetName" type="text" pInputText name="streetName" required class="form-control"
              [(ngModel)]="addEventForm.location.streetName">
     </div>
     <div class="col-md-2">
       <label class="control-label" for="streetNumber">Street number</label>
       <input id="streetNumber" type="text" pInputText name="streetNumber" class="form-control"
-             [(ngModel)]="addEventForm.location.streetNumber">
+             [(ngModel)]="addEventForm.location.streetNumber" required>
     </div>
 
     <div class="col-md-2">

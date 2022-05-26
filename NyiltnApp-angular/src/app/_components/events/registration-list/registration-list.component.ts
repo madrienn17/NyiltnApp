@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RegistrationFull} from "../../../_models/registration-full";
 import {RegistrationTable} from "../../../_models/registration-table";
 import {RegistrationService} from "../../../_services/registration.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration-list',
@@ -12,11 +13,19 @@ export class RegistrationListComponent implements OnInit {
   registrationList: RegistrationFull[] = []
   registrations: RegistrationTable[] = []
   cols: any[] = [];
+  eventId: number = 0;
 
-  constructor(private registrationService: RegistrationService) { }
+  constructor(private registrationService: RegistrationService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.registrationService.getRegistrations().subscribe( (data: any) => {
+    this.activatedRoute.paramMap.subscribe(params => {
+      // @ts-ignore
+      this.eventId = +params.get('id');
+    });
+
+    this.registrationService.getRegistrations(this.eventId).subscribe( (data: any) => {
       this.registrationList = data.data
       console.log(this.registrationList)
       this.registrations = this.registrationList.map(item => RegistrationListComponent.convertRegistration(item));
@@ -44,4 +53,7 @@ export class RegistrationListComponent implements OnInit {
     } as RegistrationTable
   }
 
+  backToList() {
+    this.router.navigate(['/event-list'])
+  }
 }

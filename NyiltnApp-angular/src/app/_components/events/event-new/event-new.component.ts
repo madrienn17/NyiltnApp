@@ -41,6 +41,7 @@ export class EventNewComponent implements OnInit {
       startTime: this.addEventForm.startTime,
       endTime: this.addEventForm.endTime,
       maxAttendeeNr: this.addEventForm.maxAttendeeNr,
+      registeredNr: 0,
       link: this.addEventForm.link,
       presentators: [],
       location: {

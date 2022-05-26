@@ -38,6 +38,7 @@ import {RegistrationListComponent} from "./_components/events/registration-list/
 import {EventListComponent} from "./_components/events/event-list/event-list.component";
 import {EventNewComponent} from "./_components/events/event-new/event-new.component";
 import { EventDetailsComponent } from './_components/events/event-details/event-details.component';
+import { EventEditComponent } from './_components/events/event-edit/event-edit.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { EventDetailsComponent } from './_components/events/event-details/event-
     RegistrationListComponent,
     EventListComponent,
     EventNewComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    EventEditComponent
   ],
     imports: [
         BrowserModule,

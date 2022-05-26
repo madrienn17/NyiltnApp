@@ -19,12 +19,12 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping("/getAll")
+    @GetMapping("")
     public MyResponseEntity<?> getAll() {
         return buildSuccessMessage(eventService.getAll());
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("/{id}")
     public MyResponseEntity<?> getById(@PathVariable Long id) {
         try {
             return buildSuccessMessage(eventService.getById(id));
@@ -33,16 +33,7 @@ public class EventController {
         }
     }
 
-    @GetMapping("/meta/getById/{id}")
-    public MyResponseEntity<?> getMetaById(@PathVariable Long id) {
-        try {
-            return buildSuccessMessage(eventService.getMetaById(id));
-        } catch (ServiceException e) {
-            return buildErrorMessage(e.getMessage(), e);
-        }
-    }
-
-    @PostMapping("/save")
+    @PostMapping("")
     public MyResponseEntity<?> add(@RequestBody EventDTO event) {
         try {
             return buildSuccessMessage(eventService.add(event));
@@ -51,7 +42,35 @@ public class EventController {
         }
     }
 
-    @PostMapping("/meta/save")
+    @DeleteMapping("/{id}")
+    public MyResponseEntity<?> delete(@PathVariable Long id) {
+        try {
+            eventService.delete(id);
+            return buildSuccessMessage();
+        } catch (ServiceException e) {
+            return buildErrorMessage(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public MyResponseEntity<?> update(@PathVariable Long id, @RequestBody EventDTO event) {
+        try {
+            return buildSuccessMessage(eventService.update(id, event));
+        } catch (ServiceException e) {
+            return buildErrorMessage(e.getMessage());
+        }
+    }
+
+    @GetMapping("/meta/{id}")
+    public MyResponseEntity<?> getMetaById(@PathVariable Long id) {
+        try {
+            return buildSuccessMessage(eventService.getMetaById(id));
+        } catch (ServiceException e) {
+            return buildErrorMessage(e.getMessage(), e);
+        }
+    }
+
+    @PostMapping("/meta")
     public MyResponseEntity<?> addMeta(@RequestBody EventMetaBE eventMetaBE) {
         return buildSuccessMessage(eventService.addEventMeta(eventMetaBE));
     }
