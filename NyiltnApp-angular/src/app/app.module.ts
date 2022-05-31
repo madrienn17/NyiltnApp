@@ -28,7 +28,7 @@ import {TooltipModule} from "primeng/tooltip";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {MenuModule} from "primeng/menu";
 import {PanelModule} from "primeng/panel";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {CardModule} from "primeng/card";
 import {LoginComponent} from "./_components/login/login.component";
 import {RegisterComponent} from "./_components/register/register.component";
@@ -88,6 +88,7 @@ import { EventEditComponent } from './_components/events/event-edit/event-edit.c
   providers: [
     authInterceptorProviders,
     MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

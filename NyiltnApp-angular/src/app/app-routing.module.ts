@@ -9,6 +9,7 @@ import {RegistrationComponent} from "./_components/events/registration/registrat
 import {RegistrationListComponent} from "./_components/events/registration-list/registration-list.component";
 import {EventDetailsComponent} from "./_components/events/event-details/event-details.component";
 import {EventEditComponent} from "./_components/events/event-edit/event-edit.component";
+import {DirtyCheckGuard} from "./_helpers/dirty-check.guard";
 
 
 const routes: Routes = [
@@ -16,8 +17,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'event-list', component: EventListComponent },
-  { path: 'event-edit/:id', component: EventEditComponent },
-  { path: 'event-new/:id', component: EventNewComponent },
+  { path: 'event-edit/:id', component: EventEditComponent, canDeactivate: [DirtyCheckGuard]},
+  { path: 'event-new/:id', component: EventNewComponent, canDeactivate: [DirtyCheckGuard]},
   { path: 'event-details/:id', component: EventDetailsComponent },
   { path: 'registration/:id', component: RegistrationComponent },
   { path: 'registrationlist/:id', component: RegistrationListComponent},

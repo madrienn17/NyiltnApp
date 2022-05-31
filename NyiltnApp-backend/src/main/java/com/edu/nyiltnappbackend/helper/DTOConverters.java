@@ -46,6 +46,7 @@ public class DTOConverters {
             return null;
         }
         return LocationBE.builder()
+                .id(locationDTO.getId())
                 .cityName(locationDTO.getCityName())
                 .latCoord(locationDTO.getLatCoord())
                 .lngCoord(locationDTO.getLngCoord())
@@ -59,6 +60,7 @@ public class DTOConverters {
             return null;
         }
         return LocationDTO.builder()
+                .id(locationBE.getId())
                 .cityName(locationBE.getCityName())
                 .latCoord(locationBE.getLatCoord())
                 .lngCoord(locationBE.getLngCoord())
@@ -76,9 +78,6 @@ public class DTOConverters {
                 .endTime(eventDTO.getEndTime())
 //                .hostUser(convertDTOToUserBE(eventDTO.getHostUser()))
                 .maxAttendeeNr(eventDTO.getMaxAttendeeNr())
-                .presentators(eventDTO.getPresentators()
-                        .stream().map(DTOConverters::convertDTOToUserBE)
-                        .collect(Collectors.toSet()))
                 .link(eventDTO.getLink())
                 .registeredNr(eventDTO.getRegisteredNr())
                 .location(convertDTOToLocationBE(eventDTO.getLocation()))
@@ -92,9 +91,6 @@ public class DTOConverters {
                 .endTime(eventBE.getEndTime())
                 .hostUser(eventBE.getHostUser().getUsername())
                 .maxAttendeeNr(eventBE.getMaxAttendeeNr())
-                .presentators(eventBE.getPresentators()
-                        .stream().map(DTOConverters::convertUserBEToDTO)
-                        .collect(Collectors.toSet()))
                 .link(eventBE.getLink())
                 .eventMeta(eventBE.getEventMeta().getId())
                 .registeredNr(eventBE.getRegisteredNr())

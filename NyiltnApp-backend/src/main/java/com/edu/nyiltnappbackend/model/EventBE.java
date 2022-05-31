@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Set;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
@@ -26,7 +25,7 @@ public class EventBE {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private EventMetaBE eventMeta;
 
     @ManyToOne
@@ -49,7 +48,4 @@ public class EventBE {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private LocationBE location;
-
-    @ManyToMany
-    private Set<UserBE> presentators;
 }

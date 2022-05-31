@@ -1,3 +1,4 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <p-toast></p-toast>
 <div>
   <form name="addEventForm"
@@ -9,7 +10,7 @@
     <div class="control-group">
       <label class="control-label" for="hostUser">Host username</label>
       <input id="hostUser" type="text" pInputText name="hostUser" [(ngModel)]="addEventForm.hostUser"
-             class="form-control" required>
+             class="form-control" required (change)="isDirty=true">
     </div>
     </div>
     <div class="col-md-4">
@@ -21,6 +22,7 @@
                   name="startTime"
                   ariaLabelledBy="stLabel"
                   pInputText
+                  (change)="isDirty=true"
                   inputStyleClass="form-control"
       ></p-calendar>
     </div>
@@ -31,12 +33,14 @@
                   [monthNavigator]="true"
                   inputStyleClass="form-control"
                   ariaLabelledBy="etLabel"
+                  (change)="isDirty=true"
                   [showTime]="true" [showIcon]="true">
       </p-calendar>
     </div>
     <div class="col-md-6">
       <label class="control-label" for="maxAttendeeNr">maxAttendeeNr</label>
       <input id="maxAttendeeNr" type="number" min="0"
+             (change)="isDirty=true"
              pInputText name="maxAttendeeNr" class="form-control"
              [(ngModel)]="addEventForm.maxAttendeeNr" required>
     </div>
@@ -44,7 +48,7 @@
       <label class="control-label" for="link">Meet link</label>
       <input id="link" type="text" pInputText name="link"
              class="form-control"
-             required
+             required (change)="isDirty=true"
              [(ngModel)]="addEventForm.link">
     </div>
     <div class="col-md-12">
@@ -54,28 +58,33 @@
     <div class="control-group">
       <label class="control-label" for="cityName">City</label>
       <input id="cityName" type="text" pInputText name="cityName" required class="form-control"
+             (change)="isDirty=true"
              [(ngModel)]="addEventForm.location.cityName">
     </div>
     </div>
     <div class="col-md-6">
       <label class="control-label" for="streetName">Street name</label>
       <input id="streetName" type="text" pInputText name="streetName" required class="form-control"
+             (change)="isDirty=true"
              [(ngModel)]="addEventForm.location.streetName">
     </div>
     <div class="col-md-2">
       <label class="control-label" for="streetNumber">Street number</label>
       <input id="streetNumber" type="text" pInputText name="streetNumber" class="form-control"
+             (change)="isDirty=true"
              [(ngModel)]="addEventForm.location.streetNumber" required>
     </div>
 
     <div class="col-md-2">
       <label class="control-label" for="latCoord">Lat coord</label>
       <input id="latCoord" name="latCoord" step="0.01" class="form-control" type="number"
+             (change)="isDirty=true"
              [(ngModel)]="addEventForm.location.latCoord">
     </div>
     <div class="col-md-2">
       <label class="control-label" for="lngCoord">Lng coord</label>
       <input id="lngCoord" name="lngCoord" step="0.01" class="form-control" type="number"
+             (change)="isDirty=true"
              [(ngModel)]="addEventForm.location.lngCoord">
     </div>
 

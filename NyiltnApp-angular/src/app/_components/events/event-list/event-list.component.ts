@@ -18,6 +18,15 @@ export class EventListComponent implements OnInit {
   isAdmin: boolean = false;
 
   eventMetaCreate: boolean = false;
+  eventMetaDelete: boolean = false;
+  metaIdToDelete: number = 0;
+  eventMetaEdit: boolean = false;
+
+  editMetaForm: any = {
+    id: 0,
+    name: '',
+    description: ''
+  };
 
   addEventMetaForm: any = {
     id: null,
@@ -62,16 +71,12 @@ export class EventListComponent implements OnInit {
   }
 
   handlePlus(eventId: number) {
-    // if admin -> go to add new event form
-    // if plain user -> go to registration for event
     this.router.navigate(['/registration', eventId])
   }
 
   getRegisteredBoolean(eventId: number) {
     return this.userRegisteredEvents.includes(eventId)
   }
-
-
 
   addEventMetaButton() {
     console.log(this.addEventMetaForm)
@@ -99,6 +104,39 @@ export class EventListComponent implements OnInit {
     });
   }
 
+  onDeleteMetaButton() {
+    this.eventService.deleteMetaById(this.metaIdToDelete).subscribe((response: any) => {
+      if (response.success) {
+        this.messageService.add({severity: 'success', summary: 'Success', detail: "Event-meta successfully deleted!"})
+        this.closeDeleteMeta();
+      } else {
+        this.messageService.add({severity: 'error', summary: 'Error', detail: "Event-meta was not deleted!"})
+      }
+    }, error => {
+      this.messageService.add({severity: 'error', summary: 'Error!', detail: error.message})
+    });
+  }
+
+  onUpdateEventMetaButton() {
+    const meta = {
+      id: this.editMetaForm.id,
+      description: this.editMetaForm.description,
+      name: this.editMetaForm.name
+    }
+
+    console.log(meta)
+    this.eventService.updateMeta(meta.id, meta).subscribe((response: any) => {
+      if (response.success) {
+        this.messageService.add({severity: 'success', summary: 'Success', detail: "Event-meta successfully updated!"})
+        this.closeEditEventMeta();
+      } else {
+        this.messageService.add({severity: 'error', summary: 'Error', detail: "Event-meta was not updated!"})
+      }
+    }, error => {
+      this.messageService.add({severity: 'error', summary: 'Error!', detail: error.message})
+    });
+  }
+
   showAddEventMetaDialog() {
     this.eventMetaCreate = true;
   }
@@ -116,5 +154,22 @@ export class EventListComponent implements OnInit {
     this.eventDeleteVisible = true;
   }
 
+  showDeleteMetaDialog(id: number) {
+    this.metaIdToDelete = id;
+    this.eventMetaDelete = true;
+  }
 
+  closeDeleteMeta() {
+    this.eventMetaDelete = false;
+  }
+
+  closeEditEventMeta() {
+    this.eventMetaEdit = false;
+  }
+
+
+  showEditEventMetaDialog(id: number) {
+    this.editMetaForm = this.events.find(x => x.id === id)
+    this.eventMetaEdit = true;
+  }
 }

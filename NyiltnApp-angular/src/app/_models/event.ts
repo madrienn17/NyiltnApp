@@ -11,6 +11,5 @@ export interface Event {
   maxAttendeeNr: number;
   registeredNr: number;
   link: string;
-  presentators: User[];
   location: Location;
 }

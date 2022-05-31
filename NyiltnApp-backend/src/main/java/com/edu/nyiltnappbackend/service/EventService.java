@@ -10,6 +10,7 @@ import com.edu.nyiltnappbackend.model.dto.EventMainDTO;
 import com.edu.nyiltnappbackend.repository.IEventMetaRepository;
 import com.edu.nyiltnappbackend.repository.IEventRepository;
 import com.edu.nyiltnappbackend.repository.IUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -100,7 +101,13 @@ public class EventService {
         eventToUpdate.setMaxAttendeeNr(event.getMaxAttendeeNr());
         eventToUpdate.setRegisteredNr(event.getRegisteredNr());
         eventToUpdate.setLink(event.getLink());
-        eventToUpdate.setLocation(DTOConverters.convertDTOToLocationBE(event.getLocation()));
+
+        eventToUpdate.getLocation().setStreetNumber(event.getLocation().getStreetNumber());
+        eventToUpdate.getLocation().setStreetName(event.getLocation().getStreetName());
+        eventToUpdate.getLocation().setLngCoord(event.getLocation().getLngCoord());
+        eventToUpdate.getLocation().setLatCoord(event.getLocation().getLatCoord());
+        eventToUpdate.getLocation().setClassroom(event.getLocation().getClassroom());
+        eventToUpdate.getLocation().setCityName(event.getLocation().getCityName());
 
         return DTOConverters.convertEventBEToDTO(this.eventRepository.save(eventToUpdate));
     }
@@ -115,6 +122,28 @@ public class EventService {
             throw new ServiceException("No Meta object with given id!");
         }
         return eventMeta.get();
+    }
+
+    public void deleteEventMeta(Long id) throws ServiceException {
+        if (this.eventMetaRepository.findById(id).isEmpty()) {
+            throw new ServiceException("The object does not exist!");
+        }
+
+        this.eventMetaRepository.deleteById(id);
+    }
+
+    public EventMetaBE updateEventMeta(Long id, EventMetaBE eventMetaBE) throws ServiceException {
+        var eventMeta = this.eventMetaRepository.findById(id);
+        if (eventMeta.isEmpty()) {
+            throw new ServiceException("No Meta object with given id!");
+        }
+
+        EventMetaBE metaToSave = eventMeta.get();
+
+        metaToSave.setDescription(eventMetaBE.getDescription());
+        metaToSave.setName(eventMetaBE.getName());
+
+        return this.eventMetaRepository.save(metaToSave);
     }
 
 }

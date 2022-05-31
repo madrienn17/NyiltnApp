@@ -44,4 +44,12 @@ export class EventService {
   saveMeta(eventMeta: any) {
     return this.http.post(baseUrl + "/meta", eventMeta, httpOptions)
   }
+
+  deleteMetaById(id: number) {
+    return this.http.delete(baseUrl + "/meta/" + id)
+  }
+
+  updateMeta(id: number, eventMeta: any) {
+    return this.http.put(baseUrl + "/meta/" + id, eventMeta, httpOptions)
+  }
 }

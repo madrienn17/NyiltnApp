@@ -12,6 +12,8 @@ import org.springframework.hateoas.RepresentationModel;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LocationDTO extends RepresentationModel<LocationDTO> {
+    private Long id;
+
     private String cityName;
 
     private String streetName;

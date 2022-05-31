@@ -74,4 +74,24 @@ public class EventController {
     public MyResponseEntity<?> addMeta(@RequestBody EventMetaBE eventMetaBE) {
         return buildSuccessMessage(eventService.addEventMeta(eventMetaBE));
     }
+
+    @DeleteMapping("/meta/{id}")
+    public MyResponseEntity<?> deleteMetaById(@PathVariable Long id) {
+        try {
+            eventService.deleteEventMeta(id);
+            return buildSuccessMessage();
+        } catch (ServiceException e) {
+            return buildErrorMessage(e.getMessage(), e);
+        }
+    }
+
+    @PutMapping("/meta/{id}")
+    public MyResponseEntity<?> updateMeta(@PathVariable Long id,
+                                          @RequestBody EventMetaBE eventMetaBE) {
+        try {
+            return buildSuccessMessage(eventService.updateEventMeta(id, eventMetaBE));
+        } catch (ServiceException e) {
+            return buildErrorMessage(e.getMessage(), e);
+        }
+    }
 }
