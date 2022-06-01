@@ -1,13 +1,18 @@
 package com.edu.nyiltnappbackend;
 
 import com.edu.nyiltnappbackend.security.JWTAuthorizationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,8 +22,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Properties;
+
 @SpringBootApplication
 public class NyiltnAppBackendApplication {
+    @Autowired
+    private static Environment env;
 
     public static void main(String[] args) {
         SpringApplication.run(NyiltnAppBackendApplication.class, args);
@@ -58,6 +67,30 @@ public class NyiltnAppBackendApplication {
 //                    .anyRequest().authenticated();
 //                    .disable();
 //                    .anyRequest().permitAll();
+        }
+
+        @Bean
+        public JavaMailSender getJavaMailSender() {
+            JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+            mailSender.setHost(env.getProperty("spring.mail.host"));
+            mailSender.setPort(Integer.parseInt(env.getProperty("spring.mail.port")));
+            mailSender.setUsername(env.getProperty("spring.mail.username"));
+            mailSender.setPassword(env.getProperty("spring.mail.password"));
+
+            Properties props = mailSender.getJavaMailProperties();
+            props.put("mail.transport.protocol", "smtp");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.debug", "true");
+
+            return mailSender;
+        }
+
+        @Bean
+        public SimpleMailMessage templateSimpleMessage() {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setText("This is the test email template for your email:\n%s\n");
+            return message;
         }
     }
 }
