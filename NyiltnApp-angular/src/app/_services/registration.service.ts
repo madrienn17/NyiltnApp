@@ -25,7 +25,7 @@ export class RegistrationService {
   }
 
   getRegistrations(eventId: number) {
-    return this.http.get(`${baseUrl}/registrations/${eventId}`)
+    return this.http.get(`${baseUrl}/${eventId}`)
   }
 
   getSchoolNames() {
@@ -38,6 +38,10 @@ export class RegistrationService {
   }
 
   getEventRegisteredByUsername(username: string) {
-    return this.http.get(baseUrl + `/${username}`)
+    return this.http.get(baseUrl + `/registered/${username}`)
+  }
+
+  removeRegistration(id: number, username: string) {
+    return this.http.delete(baseUrl + "/" + id + "/" + username);
   }
 }

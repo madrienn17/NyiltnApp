@@ -20,7 +20,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class RegistrationService {
@@ -74,6 +73,21 @@ public class RegistrationService {
         }
 
         return  DTOConverters.convertRegistrationBEToDTO(registrationRepository.save(registrationToSave));
+    }
+
+    public void remove(Long eventId, String username) throws ServiceException {
+        var registrationOptional =
+                registrationRepository.findByEvent_IdAndRegisteredUser_Username(eventId, username);
+
+        if (registrationOptional.isEmpty()) {
+            throw new ServiceException("User is not registered to the chosen event!");
+        }
+
+        RegistrationBE registration = registrationOptional.get();
+
+        registration.getEvent().setRegisteredNr(registration.getEvent().getRegisteredNr() - 1);
+
+        registrationRepository.delete(registration);
     }
 
     public List<RegistrationBE> getByEventId(Long eventId) {

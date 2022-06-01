@@ -36,4 +36,8 @@ export class TokenStorageService {
     }
     return {} as User;
   }
+
+  public getUsername(): string {
+    return this.getUser().username
+  }
 }

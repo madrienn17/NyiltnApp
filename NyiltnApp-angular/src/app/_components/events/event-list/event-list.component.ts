@@ -39,6 +39,9 @@ export class EventListComponent implements OnInit {
 
   eventIdToDelete: number = 0;
 
+  unsubscribeDialog: boolean = false;
+  eventIdToUnsub: number = 0;
+
   constructor(private eventService: EventService,
               private registrationService: RegistrationService,
               private tokenStorageService: TokenStorageService,
@@ -72,6 +75,20 @@ export class EventListComponent implements OnInit {
 
   handlePlus(eventId: number) {
     this.router.navigate(['/registration', eventId])
+  }
+
+  handleMinus() {
+    this.registrationService.removeRegistration(this.eventIdToUnsub, this.tokenStorageService.getUsername())
+      .subscribe((response:any) => {
+        if (response.success) {
+          this.messageService.add({severity: 'success', summary: 'Success', detail: "Un-registration successful!"})
+          this.closeUnsubDialog();
+        } else {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: "Un-registration failed!"})
+        }
+      }, error => {
+        this.messageService.add({severity: 'error', summary: 'Error!', detail: error.message})
+      });
   }
 
   getRegisteredBoolean(eventId: number) {
@@ -172,4 +189,14 @@ export class EventListComponent implements OnInit {
     this.editMetaForm = this.events.find(x => x.id === id)
     this.eventMetaEdit = true;
   }
+
+  showUnsubDialog(id: number) {
+    this.eventIdToUnsub = id;
+    this.unsubscribeDialog = true;
+  }
+
+  closeUnsubDialog() {
+    this.unsubscribeDialog = false;
+  }
+
 }

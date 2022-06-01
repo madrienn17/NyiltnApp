@@ -5,6 +5,7 @@ import com.edu.nyiltnappbackend.helper.ServiceException;
 import com.edu.nyiltnappbackend.model.dto.RegistrationDTO;
 import com.edu.nyiltnappbackend.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import static com.edu.nyiltnappbackend.helper.MyResponseEntity.buildErrorMessage;
@@ -30,7 +31,7 @@ public class RegistrationController {
         }
     }
 
-    @GetMapping("/registrations/{id}")
+    @GetMapping("/{id}")
     public MyResponseEntity<?> getByEventId(@PathVariable Long id) {
         return buildSuccessMessage(registrationService.getByEventId(id));
     }
@@ -46,9 +47,20 @@ public class RegistrationController {
         return buildSuccessMessage(registrationService.isUserRegisteredToEvent(eventId, username));
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/registered/{username}")
     public MyResponseEntity<?> getAllRegisteredEventIdsForUser(@PathVariable String username) {
         return buildSuccessMessage(registrationService.getAllRegisteredEventIdsForUser(username));
+    }
+
+    @DeleteMapping("/{id}/{username}")
+    public MyResponseEntity<?> deleteRegistrationByEventIdAndUsername(@PathVariable String  username,
+                                                                      @PathVariable Long id) {
+        try {
+            registrationService.remove(id, username);
+            return buildSuccessMessage();
+        } catch (ServiceException e) {
+            return buildErrorMessage(e.getMessage());
+        }
     }
 
 }
