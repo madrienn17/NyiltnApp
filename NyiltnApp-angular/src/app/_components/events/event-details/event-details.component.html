@@ -2,10 +2,10 @@
   <form name="eventDetailForm"
         class="row g-3"
         novalidate>
-    <h3>Event details</h3>
+    <h3>{{ 'Event details' | translate }}</h3>
     <div class="col-4">
       <div class="control-group">
-        <label class="control-label" for="hostUser">Host username</label>
+        <label class="control-label" for="hostUser" translate>Host username</label>
         <input id="hostUser" type="text" pInputText name="hostUser"
                disabled
                [defaultValue]="currentEvent.hostUser"
@@ -13,59 +13,59 @@
       </div>
     </div>
     <div class="col-md-4">
-      <label class="control-label" for="startTime">Start Time</label>
+      <label class="control-label" for="startTime" translate>Start Time</label>
       <input id="startTime" type="text" pInputText name="startTime" class="form-control" disabled
              [defaultValue]="currentEvent.startTime | date: 'yyyy.MM.dd HH:mm'">
     </div>
     <div class="col-md-4">
-    <label class="control-label" for="endTime">End Time</label>
+    <label class="control-label" for="endTime" translate>End Time</label>
     <input id="endTime" type="text" pInputText name="endTime" class="form-control" disabled
            [defaultValue]="currentEvent.endTime | date: 'yyyy.MM.dd HH:mm'">
     </div>
     <div class="col-md-6">
-      <label class="control-label" for="maxAttendeeNr">Limit</label>
+      <label class="control-label" for="maxAttendeeNr" translate>Limit</label>
       <input id="maxAttendeeNr" type="number" pInputText name="maxAttendeeNr" class="form-control"
              [defaultValue]="currentEvent.maxAttendeeNr" disabled>
     </div>
     <div class="col-md-6">
-      <label class="control-label" for="link">Meet link</label>
+      <label class="control-label" for="link" translate>Meet link</label>
       <input id="link" type="text" pInputText name="link" class="form-control" disabled
              [defaultValue]="currentEvent.link">
     </div>
     <div class="col-md-12">
-      <h3>Location</h3>
+      <h3>{{ 'Location' | translate }}</h3>
     </div>
     <div class="col-md-12">
       <div class="control-group">
-        <label class="control-label" for="cityName">City</label>
+        <label class="control-label" for="cityName" translate>City</label>
         <input id="cityName" type="text" pInputText name="cityName" class="form-control"
                [defaultValue]="currentEvent.location.cityName" disabled>
       </div>
     </div>
     <div class="col-md-6">
-      <label class="control-label" for="streetName">Street name</label>
+      <label class="control-label" for="streetName" translate>Street name</label>
       <input id="streetName" type="text" pInputText name="streetName" class="form-control"
              [defaultValue]="currentEvent.location.streetName" disabled>
     </div>
     <div class="col-md-2">
-      <label class="control-label" for="streetNumber">Street number</label>
+      <label class="control-label" for="streetNumber" translate>Street number</label>
       <input id="streetNumber" type="text" pInputText name="streetNumber" class="form-control"
              [defaultValue]="currentEvent.location.streetNumber" disabled>
     </div>
 
     <div class="col-md-2">
-      <label class="control-label" for="latCoord">Lat coord</label>
+      <label class="control-label" for="latCoord" translate>Lat coord</label>
       <input id="latCoord" name="latCoord" step="0.01" class="form-control" type="number"
              [defaultValue]="currentEvent.location.latCoord" disabled>
     </div>
     <div class="col-md-2">
-      <label class="control-label" for="lngCoord">Lng coord</label>
+      <label class="control-label" for="lngCoord" translate>Lng coord</label>
       <input id="lngCoord" name="lngCoord" step="0.01" class="form-control" type="number"
              [defaultValue]="currentEvent.location.lngCoord" disabled>
     </div>
 
     <div class="col-md-12">
-    <label for="description">Description</label>
+    <label for="description" translate>Description</label>
     <textarea pInputTextarea id="description" disabled type="textarea" pInputText name="description"
               [defaultValue]="eventmeta.description"
               class="form-control" required></textarea>
@@ -76,7 +76,7 @@
     <br>
     <!-- FOOTER-->
     <div class="col-md-6">
-      <button class="form-control p-button-warning" pButton type="button" label="Back"
+      <button class="form-control p-button-warning" pButton type="button" label="{{ 'Back' | translate}}"
               style="width: fit-content"
               icon="pi pi-arrow-left" (click)="backToList()"></button>
     </div>

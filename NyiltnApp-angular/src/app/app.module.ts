@@ -39,6 +39,12 @@ import {EventListComponent} from "./_components/events/event-list/event-list.com
 import {EventNewComponent} from "./_components/events/event-new/event-new.component";
 import { EventDetailsComponent } from './_components/events/event-details/event-details.component';
 import { EventEditComponent } from './_components/events/event-edit/event-edit.component';
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -83,6 +89,13 @@ import { EventEditComponent } from './_components/events/event-edit/event-edit.c
         ConfirmDialogModule,
         MenuModule,
         PanelModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        }),
         CardModule,
     ],
   providers: [

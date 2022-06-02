@@ -13,7 +13,7 @@
       novalidate
     >
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username" translate>Username</label>
         <input
           id="username"
           type="text"
@@ -28,11 +28,11 @@
           role="alert"
           *ngIf="username.errors && f.submitted"
         >
-          Username is required!
+          {{ 'Username is required!' | translate }}
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" translate>Password</label>
         <input
           id="password"
           type="password"
@@ -48,15 +48,15 @@
           role="alert"
           *ngIf="password.errors && f.submitted"
         >
-          <div *ngIf="password.errors['required']">Password is required</div>
+          <div *ngIf="password.errors['required']">{{'Password is required' | translate}}</div>
           <div *ngIf="password.errors['minlength']">
-            Password must be at least 6 characters
+            {{ 'Password must be at least 6 characters' | translate }}
           </div>
         </div>
       </div>
       <div class="form-group">
         <button class="btn btn-primary btn-block bg-dark">
-          Login
+          {{ 'Login' | translate }}
         </button>
       </div>
       <div class="form-group">
@@ -65,12 +65,12 @@
           role="alert"
           *ngIf="f.submitted && isLoginFailed"
         >
-          Login failed: {{ errorMessage }}
+          {{ 'Login failed:' | translate :{ errorMessage : errorMessage }  }}
         </div>
       </div>
     </form>
     <div class="alert alert-success" *ngIf="isLoggedIn">
-      Logged in as {{ roles }}.
+      {{ 'Logged in as ' | translate : { roles: roles } }}.
     </div>
   </div>
 </div>

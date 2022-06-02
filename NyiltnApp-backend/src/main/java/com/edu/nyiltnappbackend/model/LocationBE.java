@@ -42,4 +42,12 @@ public class LocationBE {
     @Column(name = "classroom")
     private String classroom;
 
+    @Override
+    public String toString() {
+        return  "City: " + cityName + '\n' +
+                "Street: " + streetName + '\n' +
+                "Number: " + streetNumber + '\n' +
+                "Classroom: " + classroom + '\n'+
+                "Coordinates: (" + latCoord + ", " + lngCoord + ')';
+    }
 }

@@ -2,6 +2,7 @@ package com.edu.nyiltnappbackend.service;
 
 import com.edu.nyiltnappbackend.helper.DTOConverters;
 import com.edu.nyiltnappbackend.helper.ServiceException;
+import com.edu.nyiltnappbackend.mail.EmailServiceImpl;
 import com.edu.nyiltnappbackend.model.EventBE;
 import com.edu.nyiltnappbackend.model.RegistrationBE;
 import com.edu.nyiltnappbackend.model.SchoolBE;
@@ -11,7 +12,7 @@ import com.edu.nyiltnappbackend.repository.IEventRepository;
 import com.edu.nyiltnappbackend.repository.IRegistrationRepository;
 import com.edu.nyiltnappbackend.repository.ISchoolRepository;
 import com.edu.nyiltnappbackend.repository.IUserRepository;
-import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,6 +35,9 @@ public class RegistrationService {
 
     @Resource
     private IEventRepository eventRepository;
+
+    @Autowired
+    private EmailServiceImpl emailService;
 
     public RegistrationDTO add(RegistrationDTO registrationDTO) throws ServiceException {
         RegistrationBE registrationToSave = new RegistrationBE();
@@ -72,6 +76,11 @@ public class RegistrationService {
             throw new ServiceException("User Already registered!");
         }
 
+        emailService.sendSimpleMessage(userBE.get().getEmail(), "Event Registration",
+                "Hello " + userBE.get().getUsername() + ",\n" +
+                        "Thank you for deciding to participate on our " + event.getEventMeta().getName() +
+                        " event!\n See the event's details below:\n" + event);
+
         return  DTOConverters.convertRegistrationBEToDTO(registrationRepository.save(registrationToSave));
     }
 
@@ -85,9 +94,17 @@ public class RegistrationService {
 
         RegistrationBE registration = registrationOptional.get();
 
-        registration.getEvent().setRegisteredNr(registration.getEvent().getRegisteredNr() - 1);
+        EventBE event = registration.getEvent();
+
+        event.setRegisteredNr(event.getRegisteredNr() - 1);
 
         registrationRepository.delete(registration);
+
+        emailService.sendSimpleMessage(registration.getRegisteredUser().getEmail(), "Event Un-Registration",
+                "Hello " + registration.getRegisteredUser().getUsername() + ",\n" +
+                        "We are sorry to hear that you unregistered from our " + event.getEventMeta().getName() +
+                        " event!\n You can still re-join if you make up your mind.\nSee the event's details below:\n" +
+                        event);
     }
 
     public List<RegistrationBE> getByEventId(Long eventId) {

@@ -32,4 +32,10 @@ public class EventMetaBE {
 
     @Column(name = "description")
     private String description;
+
+    @Override
+    public String toString() {
+        return "Name: " + name + '\n' +
+                "Description: " + description;
+    }
 }

@@ -26,9 +26,6 @@ import java.util.Properties;
 
 @SpringBootApplication
 public class NyiltnAppBackendApplication {
-    @Autowired
-    private static Environment env;
-
     public static void main(String[] args) {
         SpringApplication.run(NyiltnAppBackendApplication.class, args);
     }
@@ -72,10 +69,11 @@ public class NyiltnAppBackendApplication {
         @Bean
         public JavaMailSender getJavaMailSender() {
             JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-            mailSender.setHost(env.getProperty("spring.mail.host"));
-            mailSender.setPort(Integer.parseInt(env.getProperty("spring.mail.port")));
-            mailSender.setUsername(env.getProperty("spring.mail.username"));
-            mailSender.setPassword(env.getProperty("spring.mail.password"));
+            mailSender.setHost("smtp.gmail.com");
+            mailSender.setPort(587);
+
+            mailSender.setUsername("kalanyosherripotter@gmail.com");
+            mailSender.setPassword("dpgqqjtmbfysiyqs");
 
             Properties props = mailSender.getJavaMailProperties();
             props.put("mail.transport.protocol", "smtp");

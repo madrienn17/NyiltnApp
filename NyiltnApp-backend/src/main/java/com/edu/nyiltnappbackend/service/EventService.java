@@ -2,6 +2,7 @@ package com.edu.nyiltnappbackend.service;
 
 import com.edu.nyiltnappbackend.helper.DTOConverters;
 import com.edu.nyiltnappbackend.helper.ServiceException;
+import com.edu.nyiltnappbackend.mail.EmailServiceImpl;
 import com.edu.nyiltnappbackend.model.EventBE;
 import com.edu.nyiltnappbackend.model.EventMetaBE;
 import com.edu.nyiltnappbackend.model.UserBE;
@@ -9,6 +10,7 @@ import com.edu.nyiltnappbackend.model.dto.EventDTO;
 import com.edu.nyiltnappbackend.model.dto.EventMainDTO;
 import com.edu.nyiltnappbackend.repository.IEventMetaRepository;
 import com.edu.nyiltnappbackend.repository.IEventRepository;
+import com.edu.nyiltnappbackend.repository.IRegistrationRepository;
 import com.edu.nyiltnappbackend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +19,23 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class EventService {
     @Resource
     private IEventRepository eventRepository;
+
     @Resource
     private IEventMetaRepository eventMetaRepository;
+
     @Resource
     private IUserRepository userRepository;
+
+    @Resource
+    private IRegistrationRepository registrationRepository;
+
+    @Autowired
+    private EmailServiceImpl emailService;
 
     public EventDTO getById(Long id) throws ServiceException {
         Optional<EventBE> eventBE = eventRepository.findEventBEById(id);
@@ -73,8 +82,22 @@ public class EventService {
     }
 
     public void delete(Long id) throws ServiceException {
-        if (this.eventRepository.findEventBEById(id).isEmpty()) {
+        var eventOpt = this.eventRepository.findEventBEById(id);
+        if (eventOpt.isEmpty()) {
             throw new ServiceException("The object does not exist!");
+        }
+
+        // if there are users registered, get the registered user's list
+        // and email them
+        if (eventOpt.get().getRegisteredNr() > 0) {
+            var registrationList = registrationRepository.findByEvent_Id(eventOpt.get().getId());
+            registrationList.forEach(registration -> {
+                emailService.sendSimpleMessage(registration.getRegisteredUser().getEmail(), "Event Deleted",
+                        "We are sorry to announce you, that the event you were registered to," +
+                                " was deleted by an admin.\n Look around for other interesting events!\n" +
+                                "The deleted event is: " + eventOpt.get());
+                registrationRepository.delete(registration);
+            });
         }
 
         this.eventRepository.deleteById(id);
@@ -109,6 +132,16 @@ public class EventService {
         eventToUpdate.getLocation().setClassroom(event.getLocation().getClassroom());
         eventToUpdate.getLocation().setCityName(event.getLocation().getCityName());
 
+        // if there are users registered, get the registered user's list
+        // and email them
+        if (eventToUpdate.getRegisteredNr() > 0) {
+            var emailList = registrationRepository.getUserEmailsByEventId(eventToUpdate.getId());
+            emailList.forEach(email -> emailService.sendSimpleMessage(email, "Event Updated",
+                    "Dear user,\nThe event you are registered to," +
+                            " was updated by an admin.\n" +
+                            "The updated event is: " + eventToUpdate));
+        }
+
         return DTOConverters.convertEventBEToDTO(this.eventRepository.save(eventToUpdate));
     }
 
@@ -125,9 +158,19 @@ public class EventService {
     }
 
     public void deleteEventMeta(Long id) throws ServiceException {
-        if (this.eventMetaRepository.findById(id).isEmpty()) {
+        var metaOpt = this.eventMetaRepository.findById(id);
+        if (metaOpt.isEmpty()) {
             throw new ServiceException("The object does not exist!");
         }
+
+        // find every event related to this meta
+        this.eventRepository.findByEventMeta_Id(id).forEach(event -> {
+            try {
+                delete(event.getId());
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+        });
 
         this.eventMetaRepository.deleteById(id);
     }
@@ -142,6 +185,21 @@ public class EventService {
 
         metaToSave.setDescription(eventMetaBE.getDescription());
         metaToSave.setName(eventMetaBE.getName());
+
+        // find every event related to this meta
+        this.eventRepository.findByEventMeta_Id(id).forEach(event -> {
+            // if there are users registered, get the registered user's list
+            // and email them
+            if (event.getRegisteredNr() > 0) {
+                var emailList = registrationRepository.getUserEmailsByEventId(event.getId());
+                emailList.forEach(email -> {
+                    emailService.sendSimpleMessage(email, "Event-meta Updated",
+                            "Dear user,\nThe event you are registered to," +
+                                    " was updated by an admin.\n" +
+                                    "The updated data is: " + metaToSave);
+                });
+            }
+        });
 
         return this.eventMetaRepository.save(metaToSave);
     }

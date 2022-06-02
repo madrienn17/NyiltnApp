@@ -13,7 +13,7 @@
       #f="ngForm"
       novalidate
     >
-      <label for="firstName">First Name</label>
+      <label for="firstName" translate>First Name</label>
       <input
         id="firstName"
         type="text"
@@ -23,7 +23,7 @@
         required
       />
 
-      <label for="lastName">Last Name</label>
+      <label for="lastName" translate>Last Name</label>
       <input
         id="lastName"
         type="text"
@@ -33,7 +33,7 @@
         required
       />
 
-      <label for="mobileNumber">Mobile number</label>
+      <label for="mobileNumber" translate>Mobile number</label>
       <input
         id="mobileNumber"
         type="text"
@@ -43,7 +43,7 @@
         required
       />
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username" translate>Username</label>
         <input
           id="username"
           type="text"
@@ -56,17 +56,17 @@
           #username="ngModel"
         />
         <div class="alert-danger" *ngIf="username.errors && f.submitted">
-          <div *ngIf="username.errors['required']">Username is required</div>
+          <div *ngIf="username.errors['required']">{{ 'Username is required!' | translate }}</div>
           <div *ngIf="username.errors['minlength']">
-            Username must be at least 3 characters
+            {{ 'Username must be at least 3 characters' | translate }}
           </div>
           <div *ngIf="username.errors['maxlength']">
-            Username must be at most 20 characters
+            {{ 'Username must be at most 20 characters' | translate }}
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email" translate>Email</label>
         <input
           id="email"
           type="email"
@@ -78,14 +78,14 @@
           #email="ngModel"
         />
         <div class="alert-danger" *ngIf="email.errors && f.submitted">
-          <div *ngIf="email.errors['required']">Email is required</div>
+          <div *ngIf="email.errors['required']">{{ 'Email is required' | translate }}</div>
           <div *ngIf="email.errors['email']">
-            Email must be a valid email address
+            {{ 'Email must be a valid email address' | translate }}
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" translate>Password</label>
         <input
           id="password"
           type="password"
@@ -97,21 +97,21 @@
           #password="ngModel"
         />
         <div class="alert-danger" *ngIf="password.errors && f.submitted">
-          <div *ngIf="password.errors['required']">Password is required</div>
+          <div *ngIf="password.errors['required']">{{ 'Password is required' | translate }}</div>
           <div *ngIf="password.errors['minlength']">
-            Password must be at least 6 characters
+            {{ 'Password must be at least 6 characters' | translate }}
           </div>
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block bg-dark">Register</button>
+        <button class="btn btn-primary btn-block bg-dark">{{ 'Register' | translate }}</button>
       </div>
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-        Signup failed!<br />{{ errorMessage }}
+        {{ 'Signup failed!' | translate : { errorMessage: errorMessage } }}
       </div>
     </form>
     <div class="alert alert-success" *ngIf="isSuccessful">
-      Your registration is successful!
+      {{ 'Your registration is successful!' | translate }}
     </div>
   </div>
 </div>

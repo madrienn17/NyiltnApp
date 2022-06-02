@@ -1,0 +1,86 @@
+﻿{
+  "English": "English",
+  "Romanian": "Romanian",
+  "Hungarian": "Hungarian",
+
+  "Home": "Home",
+  "Events": "Events",
+  "Login": "Login",
+  "Register": "Register",
+  "LogOut": "LogOut",
+
+  "Username": "Username",
+  "Password": "Password",
+  "Username is required!": "Username is required!",
+  "Password must be at least 6 characters": "Password must be at least 6 characters",
+  "Password is required": "Password is required",
+  "Login failed:": "Login failed: {{ errorMessage }}",
+  "Logged in as ": "Logged in as {{ roles }}",
+
+  "First Name": "First Name",
+  "Last Name": "Last Name",
+  "Mobile number": "Mobile number",
+  "Username must be at least 3 characters": "Username must be at least 3 characters",
+  "Username must be at most 20 characters": "Username must be at most 20 characters",
+  "Email": "Email",
+  "Email is required": "Email is required",
+  "Email must be a valid email address": "Email must be a valid email address",
+  "Signup failed!": "Signup failed! {{ errorMessage }}",
+  "Your registration is successful!": "Your registration is successful!",
+
+  "New event": "New event",
+  "Id": "Id",
+  "Name": "Name",
+  "Description": "Description",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Host": "Host",
+  "Start": "Start",
+  "End": "End",
+  "Registered/Limit": "Registered/Limit",
+  "Join": "Join",
+  "Details": "Details",
+  "There is no event added yet.": "There is no event added yet.",
+
+  "New event-meta": "New event-meta",
+  "Cancel": "Cancel",
+  "Save": "Save",
+
+  "Edit event-meta": "Edit event-meta",
+
+  "Delete event": "Delete event",
+  "Are you sure you want to delete this event? The action can't be reverted." : "Are you sure you want to delete this event? The action can't be reverted.",
+  "Yes": "Yes",
+
+  "Delete event meta": "Delete event meta",
+  "Are you sure you want to delete this object? Every event related to it, will be deleted!": "Are you sure you want to delete this object? Every event related to it, will be deleted!",
+
+  "Unsubscribe from event": "Unsubscribe from event",
+  "Are you sure you want to unsubscribe from this event?": "Are you sure you want to unsubscribe from this event?",
+  "No": "No",
+
+  "Event details": "Event details",
+  "Host username": "Host username",
+  "Start Time": "Start Time",
+  "End Time": "End Time",
+  "Limit": "Limit",
+  "Meet link": "Meet link",
+  "Location": "Location",
+  "City": "City",
+  "Street name": "Street name",
+  "Street number": "Street number",
+  "Lat coord": "Latitudinal coordinates",
+  "Lng coord": "Longitudinal coordinates",
+  "Back": "Back",
+
+  "Edit event": "Edit event",
+
+  "Add new event": "Add new event",
+  "Max Attendees": "Max Attendees",
+
+  "Register to event": "Register to event",
+  "School": "School",
+  "Select the school": "Select the school"
+
+
+}

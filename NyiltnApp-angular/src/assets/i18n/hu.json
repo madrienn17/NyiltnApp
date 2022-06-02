@@ -1,0 +1,84 @@
+﻿{
+  "English": "Angol",
+  "Romanian": "Román",
+  "Hungarian": "Magyar",
+
+  "Home": "Otthon",
+  "Events": "Események",
+  "Login": "Bejelentkezés",
+  "Register": "Regisztráció",
+  "LogOut": "Kijelentkezés",
+
+  "Username": "Felhasználónév",
+  "Password": "Jelszó",
+  "Username is required!": "Felhasználónév megadása kötelező!",
+  "Password must be at least 6 characters": "A jelszónak min. 6 karakterből kell állnia",
+  "Password is required": "Jelszó megadása kötelező!",
+  "Login failed:": "Bejelentkezés sikertelen: {{ errorMessage }}",
+  "Logged in as ": "Bejelentkezve mint {{ roles }}",
+
+  "First Name": "Keresztnév",
+  "Last Name": "Vezetéknév",
+  "Mobile number": "Telefonszám",
+  "Username must be at least 3 characters": "A felhasználónévnek min. 3 karakterből kell állnia",
+  "Username must be at most 20 characters": "A felhasználónévnek max. 20 karakterből kell állnia",
+  "Email": "Email",
+  "Email is required": "Email cím megadása kötelező",
+  "Email must be a valid email address": "Adjon meg egy megfelelő formátumú email címet",
+  "Signup failed!": "A regisztáció sikertelen! {{ errorMessage }}",
+  "Your registration is successful!": "Sikeres regisztáció!",
+
+  "New event": "Új esemény",
+  "Id": "Id",
+  "Name": "Név",
+  "Description": "Leírás",
+  "Edit": "Szerkeszt",
+  "Delete": "Töröl",
+  "Host": "Szervező",
+  "Start": "Kezdés időpontja",
+  "End": "Befejezés időpontja",
+  "Registered/Limit": "Regisztrált/Limit",
+  "Join": "Feliratkozás",
+  "Details": "Részletek",
+  "There is no event added yet.": "Még nincs hozzáadva egyetlen esemény sem.",
+
+  "New event-meta": "Új esemény",
+  "Cancel": "Mégsem",
+  "Save": "Mentés",
+
+  "Edit event-meta": "Esemény szerkesztése",
+
+  "Delete event": "Esemény törlése",
+  "Are you sure you want to delete this event? The action can't be reverted." : "Biztosan törölni szeretné ezt az eseményt? A műveletet nem fogja tudni visszavonni.",
+  "Yes": "Igen",
+
+  "Delete event meta": "Esemény-meta törlése",
+  "Are you sure you want to delete this object? Every event related to it, will be deleted!": "Biztosan törölni akarja ezt az objektumot? Minden hozzá kapcsolódó esemény törlésre kerül!",
+
+  "Unsubscribe from event": "Leiratkozás az eseményről",
+  "Are you sure you want to unsubscribe from this event?": "Biztosan le szeretne iratkozni erről az eseményről?",
+  "No": "Nem",
+
+  "Event details": "Esemény részletei",
+  "Host username": "Szervező felhasználóneve",
+  "Start Time": "Kezdés időpontja",
+  "End Time": "Befejezés időpontja",
+  "Limit": "Limit",
+  "Meet link": "Meet link",
+  "Location": "Helyszín",
+  "City": "Település",
+  "Street name": "Utca",
+  "Street number": "Szám",
+  "Lat coord": "Szélességi koordináták",
+  "Lng coord": "Hosszúsági koordináták",
+  "Back": "Vissza",
+
+  "Edit event": "Esemény szerkesztése",
+
+  "Add new event": "Új esemény",
+  "Max Attendees": "Max. létszám",
+
+  "Register to event": "Feliratkozás eseményre",
+  "School": "Iskola",
+  "Select the school": "Válassza ki az iskolát"
+}

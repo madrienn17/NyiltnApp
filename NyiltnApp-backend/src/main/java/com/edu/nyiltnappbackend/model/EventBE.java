@@ -48,4 +48,16 @@ public class EventBE {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private LocationBE location;
+
+    @Override
+    public String toString() {
+        return  "Name: " + eventMeta.getName() + '\n' +
+                "Description: " + eventMeta.getDescription() + '\n'+
+                "Host: " + hostUser.getFirstName() + ' ' + hostUser.getLastName() + '\n' +
+                "Start time: " + startTime + '\n' +
+                "End time: " + endTime + '\n' +
+                "Registered/Max: " + registeredNr + '/' + maxAttendeeNr + '\n' +
+                "meet link: " + link + '\n' +
+                "Location: " + location;
+    }
 }

@@ -5,10 +5,10 @@
         class="row g-3"
         #f="ngForm"
         novalidate>
-    <h3>Edit event</h3>
+    <h3>{{ 'Edit event' | translate }}</h3>
     <div class="col-4">
       <div class="control-group">
-        <label class="control-label" for="hostUser">Host username</label>
+        <label class="control-label" for="hostUser" translate>Host username</label>
         <input id="hostUser" type="text" pInputText name="hostUser"
                [(ngModel)]="currentEvent.hostUser"
                (change)="isDirty=true"
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <label class="control-label" id="stLabel">Start Time</label>
+      <label class="control-label" id="stLabel" translate>Start Time</label>
       <br>
       <p-calendar [(ngModel)]="currentEvent.startTime" [showIcon]="true"
                   [monthNavigator]="true"
@@ -29,7 +29,7 @@
       ></p-calendar>
     </div>
     <div class="col-md-4">
-      <label class="control-label" id="etLabel">End time</label>
+      <label class="control-label" id="etLabel" translate>End Time</label>
       <br>
       <p-calendar id="endTime" pInputText [(ngModel)]="currentEvent.endTime" name="endTime"
                   [monthNavigator]="true"
@@ -40,49 +40,49 @@
       </p-calendar>
     </div>
     <div class="col-md-6">
-      <label class="control-label" for="maxAttendeeNr">Limit</label>
+      <label class="control-label" for="maxAttendeeNr" translate>Limit</label>
       <input id="maxAttendeeNr" type="number" pInputText name="maxAttendeeNr" class="form-control"
              (change)="isDirty=true"
              [(ngModel)]="currentEvent.maxAttendeeNr">
     </div>
     <div class="col-md-6">
-      <label class="control-label" for="link">Meet link</label>
+      <label class="control-label" for="link" translate>Meet link</label>
       <input id="link" type="text" pInputText name="link" class="form-control"
              (change)="isDirty=true"
              [(ngModel)]="currentEvent.link">
     </div>
     <div class="col-md-12">
-      <h3>Location</h3>
+      <h3>{{ 'Location' | translate }}</h3>
     </div>
     <div class="col-md-12">
       <div class="control-group">
-        <label class="control-label" for="cityName">City</label>
+        <label class="control-label" for="cityName" translate>City</label>
         <input id="cityName" type="text" pInputText name="cityName" class="form-control"
                (change)="isDirty=true"
                [(ngModel)]="currentEvent.location.cityName">
       </div>
     </div>
     <div class="col-md-6">
-      <label class="control-label" for="streetName">Street name</label>
+      <label class="control-label" for="streetName" translate>Street name</label>
       <input id="streetName" type="text" pInputText name="streetName" class="form-control"
              (change)="isDirty=true"
              [(ngModel)]="currentEvent.location.streetName">
     </div>
     <div class="col-md-2">
-      <label class="control-label" for="streetNumber">Street number</label>
+      <label class="control-label" for="streetNumber" translate>Street number</label>
       <input id="streetNumber" type="text" pInputText name="streetNumber" class="form-control"
              (change)="isDirty=true"
              [(ngModel)]="currentEvent.location.streetNumber">
     </div>
 
     <div class="col-md-2">
-      <label class="control-label" for="latCoord">Lat coord</label>
+      <label class="control-label" for="latCoord" translate>Lat coord</label>
       <input id="latCoord" name="latCoord" step="0.01" class="form-control" type="number"
              (change)="isDirty=true"
              [(ngModel)]="currentEvent.location.latCoord">
     </div>
     <div class="col-md-2">
-      <label class="control-label" for="lngCoord">Lng coord</label>
+      <label class="control-label" for="lngCoord" translate>Lng coord</label>
       <input id="lngCoord" name="lngCoord" step="0.01" class="form-control" type="number"
              (change)="isDirty=true"
              [(ngModel)]="currentEvent.location.lngCoord">
@@ -91,13 +91,13 @@
     <br>
     <!-- FOOTER-->
     <div class="col-md-6">
-      <button class="form-control p-button-warning" pButton type="button" label="Back"
+      <button class="form-control p-button-warning" pButton type="button" label="{{ 'Back' | translate }}"
               style="width: fit-content"
               icon="pi pi-arrow-left" (click)="backToList()"></button>
     </div>
     <div class="col-md-6">
       <button class="form-control p-button-success" pButton [disabled]="f.form.invalid" type="submit"
-              label="Save" icon="pi pi-check"
+              label="{{ 'Save' | translate }}" icon="pi pi-check"
               style="width: fit-content"
               (click)="updateEventButton()"></button>
     </div>

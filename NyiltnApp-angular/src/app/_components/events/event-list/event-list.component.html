@@ -3,7 +3,7 @@
 <div class="card">
   <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
-      <button *ngIf="isAdmin" pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+      <button *ngIf="isAdmin" pButton pRipple label="{{ 'New event' | translate }}" icon="pi pi-plus" class="p-button-success mr-2"
               (click)="showAddEventMetaDialog()"></button>
     </ng-template>
   </p-toolbar>
@@ -12,11 +12,11 @@
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 3rem"></th>
-            <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon> </th>
-            <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-            <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
-            <th *ngIf="isAdmin">Edit</th>
-            <th *ngIf="isAdmin">Delete</th>
+            <th pSortableColumn="id" translate>Id <p-sortIcon field="id"></p-sortIcon> </th>
+            <th pSortableColumn="name" translate>Name <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="description" translate>Description <p-sortIcon field="description"></p-sortIcon></th>
+            <th *ngIf="isAdmin" translate>Edit</th>
+            <th *ngIf="isAdmin" translate>Delete</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-meta let-expanded="expanded">
@@ -50,14 +50,14 @@
                     <p-table [value]="meta.eventList" dataKey="id">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th pSortableColumn="hostUser">Host <p-sortIcon field="hostUser"></p-sortIcon></th>
-                                <th pSortableColumn="startTime">Start <p-sortIcon field="startTime"></p-sortIcon></th>
-                                <th pSortableColumn="endTime">End <p-sortIcon field="endTime"></p-sortIcon></th>
-                                <th pSortableColumn="maxAttendeeNr">Registered/Limit <p-sortIcon field="maxAttendeeNr"></p-sortIcon></th>
-                                <th *ngIf="!isAdmin" style="width: 4rem">Join</th>
-                                <th style="width: 3rem">Details</th>
-                                <th *ngIf="isAdmin" style="width: 4rem">Edit</th>
-                                <th *ngIf="isAdmin" style="width: 4rem">Delete</th>
+                                <th pSortableColumn="hostUser" translate>Host <p-sortIcon field="hostUser"></p-sortIcon></th>
+                                <th pSortableColumn="startTime" translate>Start <p-sortIcon field="startTime"></p-sortIcon></th>
+                                <th pSortableColumn="endTime" translate>End <p-sortIcon field="endTime"></p-sortIcon></th>
+                                <th pSortableColumn="maxAttendeeNr" translate>Registered/Limit <p-sortIcon field="maxAttendeeNr"></p-sortIcon></th>
+                                <th *ngIf="!isAdmin" style="width: 4rem" translate>Join</th>
+                                <th style="width: 3rem" translate>Details</th>
+                                <th *ngIf="isAdmin" style="width: 4rem" translate>Edit</th>
+                                <th *ngIf="isAdmin" style="width: 4rem" translate>Delete</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-event>
@@ -100,7 +100,7 @@
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
                             <tr>
-                                <td colspan="6">There is no event added yet.</td>
+                                <td colspan="6">{{ 'There is no event added yet.' | translate }}</td>
                             </tr>
                         </ng-template>
                     </p-table>
@@ -119,16 +119,16 @@
 </div>
 
 <!--DIALOG FOR ADDING NEW EVENT META-->
-<p-dialog [(visible)]="eventMetaCreate && isAdmin" [style]="{width: '450px'}" header="New event-meta"
+<p-dialog [(visible)]="eventMetaCreate && isAdmin" [style]="{width: '450px'}"  header="{{ 'New event-meta' | translate}}"
           [modal]="true" styleClass="p-fluid" [closable]="false" [closeOnEscape]="false">
   <form name="addEventForm"
         #ff="ngForm"
         novalidate>
     <div class="p-field">
-      <label for="title">Title</label>
-      <input id="title" type="text" pInputText name="title" [(ngModel)]="addEventMetaForm.name"
+      <label for="title" translate>Name</label>
+      <input id="title" type="text" pInputText name="name" [(ngModel)]="addEventMetaForm.name"
              class="form-control" required>
-      <label for="description">Description</label>
+      <label for="description" translate>Description</label>
       <textarea pInputTextarea id="description" type="textarea" pInputText name="description"
                 [(ngModel)]="addEventMetaForm.description"
                 class="form-control" required></textarea>
@@ -137,12 +137,12 @@
     <!-- FOOTER-->
     <div class="row">
       <div class="col">
-        <button class="form-control p-button-warning" pButton type="button" label="Cancel"
+        <button class="form-control p-button-warning" pButton type="button" label="{{ 'Cancel' | translate }}"
                 icon="pi pi-times" (click)="closeAddEventMeta()"></button>
       </div>
       <div class="col">
         <button class="form-control p-button-success" pButton [disabled]="ff.form.invalid" type="submit"
-                label="Save" icon="pi pi-check"
+                label="{{ 'Save' | translate }}" icon="pi pi-check"
                 (click)="addEventMetaButton()"></button>
       </div>
     </div>
@@ -150,15 +150,15 @@
 </p-dialog>
 
 <!--DIALOG FOR EDITING AN EVENT META-->
-<p-dialog [(visible)]="eventMetaEdit && isAdmin" [style]="{width: '450px'}" header="New event-meta"
+<p-dialog [(visible)]="eventMetaEdit && isAdmin" [style]="{width: '450px'}" header="{{ 'Edit event-meta' | translate }}"
 [modal]="true" styleClass="p-fluid" [closable]="false" [closeOnEscape]="false">
 <form name="editMetaForm"
       novalidate>
   <div class="p-field">
-    <label for="titleE">Title</label>
-    <input id="titleE" type="text" pInputText name="title" [(ngModel)]="editMetaForm.name"
+    <label for="nameE" translate>Name</label>
+    <input id="nameE" type="text" pInputText name="nameE" [(ngModel)]="editMetaForm.name"
            class="form-control" required>
-    <label for="descriptionE">Description</label>
+    <label for="descriptionE" translate>Description</label>
     <textarea pInputTextarea id="descriptionE" type="textarea" pInputText name="description"
               [(ngModel)]="editMetaForm.description"
               class="form-control" required></textarea>
@@ -167,21 +167,21 @@
   <!-- FOOTER-->
   <div class="row">
     <div class="col">
-      <button class="form-control p-button-warning" pButton type="button" label="Cancel"
+      <button class="form-control p-button-warning" pButton type="button" label="{{ 'Cancel' | translate }}"
               icon="pi pi-times" (click)="closeEditEventMeta()"></button>
     </div>
     <div class="col">
       <button class="form-control p-button-success" pButton type="submit"
-              label="Save" icon="pi pi-check"
+              label="{{ 'Save' | translate }}" icon="pi pi-check"
               (click)="onUpdateEventMetaButton()"></button>
     </div>
   </div>
 </form>
 
 </p-dialog>
-<!--DIALOG FOR DELETING EVENT-->
 
-<p-dialog [(visible)]="eventDeleteVisible" [style]="{width: '300px'}" header="{{'Delete event'}}"
+<!--DIALOG FOR DELETING EVENT-->
+<p-dialog [(visible)]="eventDeleteVisible" [style]="{width: '300px'}" header="{{ 'Delete event' | translate }}"
           [modal]="true"
           styleClass="p-fluid">
   <ng-template pTemplate="content">
@@ -190,15 +190,15 @@
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="{{'Cancel'}}" icon="pi pi-times" class="p-button-text"
+    <button pButton pRipple label="{{ 'Cancel' | translate }}" icon="pi pi-times" class="p-button-text"
             (click)="closeDeleteEvent()"></button>
-    <button pButton pRipple label="{{'Yes'}}" icon="pi pi-check" class="p-button-text"
+    <button pButton pRipple label="{{ 'Yes' | translate }}" icon="pi pi-check" class="p-button-text"
             (click)="onDeleteEventButton()"></button>
   </ng-template>
 </p-dialog>
 
 <!--DIALOG FOR DELETING AN EVENT META AND ALL IT'S IMPLEMENTATIONS-->
-<p-dialog [(visible)]="eventMetaDelete" [style]="{width: '300px'}" header="{{'Delete event meta'}}"
+<p-dialog [(visible)]="eventMetaDelete" [style]="{width: '300px'}" header="{{ 'Delete event meta' | translate }}"
           [modal]="true"
           styleClass="p-fluid">
   <ng-template pTemplate="content">
@@ -207,15 +207,15 @@
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="{{'Cancel'}}" icon="pi pi-times" class="p-button-text"
+    <button pButton pRipple label="{{'Cancel' | translate}}" icon="pi pi-times" class="p-button-text"
             (click)="closeDeleteMeta()"></button>
-    <button pButton pRipple label="{{'Yes'}}" icon="pi pi-check" class="p-button-text"
+    <button pButton pRipple label="{{'Yes' | translate}}" icon="pi pi-check" class="p-button-text"
             (click)="onDeleteMetaButton()"></button>
   </ng-template>
 </p-dialog>
 
 <!--DIALOG FOR UNSUBSCRIBING FROM AN EVENT-->
-<p-dialog [(visible)]="unsubscribeDialog" [style]="{width: '300px'}" header="{{'Unsubscribe from event'}}"
+<p-dialog [(visible)]="unsubscribeDialog" [style]="{width: '300px'}" header="{{'Unsubscribe from event' | translate}}"
           [modal]="true"
           styleClass="p-fluid">
   <ng-template pTemplate="content">
@@ -224,9 +224,9 @@
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="{{'No'}}" icon="pi pi-times" class="p-button-text"
+    <button pButton pRipple label="{{'No' | translate}}" icon="pi pi-times" class="p-button-text"
             (click)="closeUnsubDialog()"></button>
-    <button pButton pRipple label="{{'Yes'}}" icon="pi pi-check" class="p-button-text"
+    <button pButton pRipple label="{{'Yes' | translate}}" icon="pi pi-check" class="p-button-text"
             (click)="handleMinus()"></button>
   </ng-template>
 </p-dialog>

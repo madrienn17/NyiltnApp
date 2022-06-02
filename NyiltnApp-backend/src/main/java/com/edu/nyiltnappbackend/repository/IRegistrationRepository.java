@@ -13,4 +13,5 @@ public interface IRegistrationRepository extends JpaRepository<RegistrationBE, L
     Optional<List<Long>> getEventIdsByUsername(String username);
     List<RegistrationBE> findByEvent_Id(Long eventId);
     Optional<RegistrationBE> findByEvent_IdAndRegisteredUser_Username(Long eventId, String username);
+    List<String> getUserEmailsByEventId(Long eventId);
 }

@@ -46,7 +46,6 @@ public class DTOConverters {
             return null;
         }
         return LocationBE.builder()
-                .id(locationDTO.getId())
                 .cityName(locationDTO.getCityName())
                 .latCoord(locationDTO.getLatCoord())
                 .lngCoord(locationDTO.getLngCoord())
@@ -60,7 +59,6 @@ public class DTOConverters {
             return null;
         }
         return LocationDTO.builder()
-                .id(locationBE.getId())
                 .cityName(locationBE.getCityName())
                 .latCoord(locationBE.getLatCoord())
                 .lngCoord(locationBE.getLngCoord())

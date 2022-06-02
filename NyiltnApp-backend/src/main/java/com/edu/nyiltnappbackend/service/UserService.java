@@ -1,12 +1,12 @@
 package com.edu.nyiltnappbackend.service;
 
 import com.edu.nyiltnappbackend.helper.DTOConverters;
-import com.edu.nyiltnappbackend.helper.MyResponseEntity;
 import com.edu.nyiltnappbackend.helper.ServiceException;
+import com.edu.nyiltnappbackend.mail.EmailServiceImpl;
 import com.edu.nyiltnappbackend.model.UserBE;
 import com.edu.nyiltnappbackend.model.dto.UserDTO;
 import com.edu.nyiltnappbackend.repository.IUserRepository;
-import org.springframework.security.core.parameters.P;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +18,9 @@ public class UserService {
 
     @Resource
     private IUserRepository userRepository;
+
+    @Autowired
+    private EmailServiceImpl emailService;
 
     /**
      * Method to register a new user into the database
@@ -31,6 +34,9 @@ public class UserService {
             throw new ServiceException("Username already taken!");
         }
         UserBE savedUser = userRepository.save(DTOConverters.convertDTOToUserBE(userDto));
+
+        emailService.sendSimpleMessage(savedUser.getEmail(),"Welcome!", "You've been successfully registered"
+        + " to Nyiltnapp application!\nTake a look into our events, and feel free to join!");
         return DTOConverters.convertUserBEToDTO(savedUser);
     }
 

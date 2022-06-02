@@ -19,7 +19,8 @@ import java.sql.Timestamp;
                 query = "SELECT r FROM RegistrationBE r WHERE r.event.id=:eventId and r.registeredUser.username=:username")
 @NamedQuery(name = "RegistrationBE.getEventIdsByUsername",
                 query = "SELECT r.event.id FROM RegistrationBE r WHERE r.registeredUser.username=:username")
-
+@NamedQuery(name = "RegistrationBE.getUserEmailsByEventId",
+                query = "SELECT r.registeredUser.email FROM RegistrationBE r WHERE r.event.id=:eventId")
 public class RegistrationBE {
 
     @Id

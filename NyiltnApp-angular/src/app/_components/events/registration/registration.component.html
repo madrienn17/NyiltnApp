@@ -1,7 +1,7 @@
 <p-toast position="top-right"></p-toast>
 <div class="col-md-12">
   <div class="card card-container">
-    <h1>Register to event </h1>
+    <h1> {{ 'Register to event' | translate }} </h1>
     <form
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
@@ -13,7 +13,7 @@
         <br>
         <p-dropdown id="schoolName" [options]="schools"
                     optionLabel="label"
-                    placeholder="Select the school"
+                    placeholder="{{ 'Select the school' | translate}}"
                     [optionValue]="schools.schoolName"
                     [(ngModel)]="form.schoolName"
                     [showClear]="true"
@@ -22,7 +22,7 @@
         </p-dropdown>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block bg-dark">Register</button>
+        <button class="btn btn-primary btn-block bg-dark">{{ 'Register' | translate }}</button>
       </div>
     </form>
   </div>
