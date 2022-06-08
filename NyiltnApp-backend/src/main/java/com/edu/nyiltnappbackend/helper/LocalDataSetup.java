@@ -40,15 +40,16 @@ public class LocalDataSetup implements ApplicationRunner {
                 String firstName = faker.name().firstName();
                 String lastName = faker.name().lastName();
 //                userRepository.save
+                final String username = firstName.toLowerCase(Locale.ROOT) + lastName.toLowerCase(Locale.ROOT);
                 System.out.println(UserBE.builder()
-                        .firstName(faker.name().firstName())
-                        .lastName(faker.name().lastName())
-                        .username(firstName+lastName)
+                        .firstName(firstName)
+                        .lastName(lastName)
+                        .username(username)
                         .mobileNumber(faker.phoneNumber().cellPhone().replace("+36", "+40"))
-                        .email(firstName+lastName + "@gmail.com")
-                        .password(passwordEncoder.encode(firstName+lastName))
+                        .email(username + "@gmail.com")
+                        .password(passwordEncoder.encode(username))
                         .role("USER")
-                        .token("")
+                        .token(null)
                         .build());
             }
     }

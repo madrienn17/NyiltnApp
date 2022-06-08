@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.sql.Timestamp;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
@@ -38,6 +39,7 @@ public class EventBE {
     private Timestamp endTime;
 
     @Column(name = "max_attendee_nr")
+    @Min(0)
     private Integer maxAttendeeNr;
 
     @Column(name = "registered_nr")

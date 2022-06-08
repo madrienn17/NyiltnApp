@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
@@ -44,6 +45,7 @@ public class UserBE {
     private String username;
 
     @ToString.Exclude
+    @Min(6)
     private String password;
 
     @Column(columnDefinition = "varchar(255) default 'USER' ")

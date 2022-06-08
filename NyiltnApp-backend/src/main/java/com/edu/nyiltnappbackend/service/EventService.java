@@ -77,6 +77,11 @@ public class EventService {
         if (meta.isEmpty()) {
             throw new ServiceException("Event meta invalid!");
         }
+
+        if (eventToSave.getStartTime().after(eventToSave.getEndTime())) {
+            throw new ServiceException("Start time must be earlier than end time!");
+        }
+
         eventToSave.setEventMeta(meta.get());
         return DTOConverters.convertEventBEToDTO(this.eventRepository.save(eventToSave));
     }

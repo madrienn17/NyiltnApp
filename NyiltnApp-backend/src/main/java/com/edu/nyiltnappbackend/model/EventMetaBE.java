@@ -6,6 +6,7 @@ import lombok.*;
 import org.w3c.dom.Text;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
@@ -27,9 +28,11 @@ public class EventMetaBE {
     @Column(name = "id")
     private Long id;
 
+    @NotBlank
     @Column(name = "name")
     private String name;
 
+    @NotBlank
     @Column(name = "description")
     private String description;
 
