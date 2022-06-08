@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
@@ -24,17 +26,21 @@ public class UserBE {
     @Column(name = "id")
     private Long id;
 
+    @NotBlank(message = "FirstName is mandatory")
     @Column(name = "first_name")
     private String firstName;
 
+    @NotBlank(message = "LastName is mandatory")
     @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "mobile_number")
     private String mobileNumber;
 
+    @Email
     private String email;
 
+    @NotBlank(message = "Username is mandatory")
     private String username;
 
     @ToString.Exclude

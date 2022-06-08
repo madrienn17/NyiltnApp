@@ -24,13 +24,13 @@ public class TokenGenerator {
      * @param username username for which the token is created
      * @return the token
      */
-    public String getJWTToken(String username) {
+    public String getJWTToken(String username, String role) {
         String secretKey = "mySecretKey";
 
         String token = Jwts
                 .builder()
-                .setId("softtekJWT")
-                .setSubject(username)
+                .setId(username)
+                .setSubject(role)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + millisTillInvalidation))
                 .signWith(SignatureAlgorithm.HS512,

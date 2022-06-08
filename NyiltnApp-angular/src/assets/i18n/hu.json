@@ -1,4 +1,8 @@
 ﻿{
+
+  "Welcome": "Üdv",
+  "Started": "Kérem jelentkezzen be, vagy regisztráljon a folytatáshoz",
+
   "English": "Angol",
   "Romanian": "Román",
   "Hungarian": "Magyar",
@@ -80,5 +84,12 @@
 
   "Register to event": "Feliratkozás eseményre",
   "School": "Iskola",
-  "Select the school": "Válassza ki az iskolát"
+  "Select the school": "Válassza ki az iskolát",
+
+
+  "Reset password": "Jelszó csere",
+  "PasswordMessage": "Frissíteni akarja jelszavát? A link amin keresztül ezt megteheti, el lesz küldve a megadott e-mail címre.",
+  "InvalidToken": "A jelszó visszaállításához generált kódja nem érvényes, amennyiben meg szeretné változtatni jelszavát, generálja újra!",
+  "Submit": "Megerősít"
+
 }

@@ -6,7 +6,6 @@ import {EventMeta} from "../../../_models/event-meta";
 import {EventService} from "../../../_services/event.service";
 import {RegistrationService} from "../../../_services/registration.service";
 import {TokenStorageService} from "../../../_services/token-storage.service";
-import {UserService} from "../../../_services/user.service";
 
 @Component({
   selector: 'app-event-list',
@@ -45,7 +44,6 @@ export class EventListComponent implements OnInit {
   constructor(private eventService: EventService,
               private registrationService: RegistrationService,
               private tokenStorageService: TokenStorageService,
-              private userService: UserService,
               private router: Router,
               private messageService: MessageService) { }
 
@@ -53,24 +51,24 @@ export class EventListComponent implements OnInit {
     this.isAdmin = this.tokenStorageService.getUser().role != undefined ?
       this.tokenStorageService.getUser().role.toUpperCase() === "ADMIN" : false;
 
+    this.load();
+  }
+
+  load() {
     this.eventService.getAll().subscribe((e:any) => {
-      console.log(e);
       this.events = e.data;
-      console.log(this.events)
     })
 
     this.registrationService.getEventRegisteredByUsername(this.tokenStorageService.getUser().username).subscribe(
       (resp:any)=> {
-        console.log(resp)
         if (resp.success) {
           this.userRegisteredEvents = resp.data;
         } else {
           this.messageService.add({severity: 'error', summary: 'Error!', detail: resp.message})
         }
-    }, error => {
+      }, error => {
         this.messageService.add({severity: 'error', summary: 'Error!', detail: error.message})
       })
-
   }
 
   handlePlus(eventId: number) {
@@ -160,10 +158,12 @@ export class EventListComponent implements OnInit {
 
   closeAddEventMeta() {
     this.eventMetaCreate = false
+    this.load()
   }
 
   closeDeleteEvent() {
     this.eventDeleteVisible = false;
+    this.load()
   }
 
   showDeleteEventDialog(id: number) {
@@ -178,10 +178,12 @@ export class EventListComponent implements OnInit {
 
   closeDeleteMeta() {
     this.eventMetaDelete = false;
+    this.load()
   }
 
   closeEditEventMeta() {
     this.eventMetaEdit = false;
+    this.load()
   }
 
 
@@ -197,6 +199,7 @@ export class EventListComponent implements OnInit {
 
   closeUnsubDialog() {
     this.unsubscribeDialog = false;
+    this.load()
   }
 
 }

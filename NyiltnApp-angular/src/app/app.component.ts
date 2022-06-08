@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {TokenStorageService} from "./_services/token-storage.service";
 import {MenuItem} from "primeng/api";
 import {TranslateService} from "@ngx-translate/core";
+import {AuthService} from "./_services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,9 @@ export class AppComponent {
   isAdmin = false;
   username?: string;
   languageItems: MenuItem[] = [];
+
   constructor(private tokenStorageService: TokenStorageService,
+              private authService: AuthService,
               public translate: TranslateService) {
     // initializing translation module
     translate.addLangs(['en', 'ro', 'hu']);
@@ -41,13 +44,15 @@ export class AppComponent {
       this.username = user.username;
     }
 
+    this.setMenu()
+
+    this.translate.onLangChange.subscribe(() => {
+      this.setMenu();
+    });
+  }
+
+  setMenu() {
     this.languageItems = [
-      {
-        label: this.translate.instant('Romanian'),
-        command: () => {
-          this.useLanguage('ro');
-        }
-      },
       {
         label: this.translate.instant('English'),
         command: () => {
@@ -59,12 +64,19 @@ export class AppComponent {
         command: () => {
           this.useLanguage('hu');
         }
+      },
+      {
+        label: this.translate.instant('Romanian'),
+        command: () => {
+          this.useLanguage('ro');
+        }
       }
     ];
   }
 
   logout(): void {
-    this.tokenStorageService.signOut();
+    this.authService.logout(this.tokenStorageService.getUsername()).toPromise();
+    this.tokenStorageService.signOut()
     window.location.reload();
   }
 }

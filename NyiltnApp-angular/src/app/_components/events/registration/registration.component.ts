@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService} from "primeng/api";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Registration} from "../../../_models/registration";
 import {RegistrationService} from "../../../_services/registration.service";
 
@@ -21,7 +21,8 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private registrationService: RegistrationService,
               private messageService: MessageService,
-              private activatedRoute:ActivatedRoute) { }
+              private activatedRoute:ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -53,6 +54,7 @@ export class RegistrationComponent implements OnInit {
         this.messageService.add({severity: 'error', summary: 'Error!', detail: response.message})
       } else {
         this.messageService.add({severity: 'success', summary: 'Success!', detail: "Registration successfully sent"})
+        this.router.navigate(['event-list'])
       }
     }, error => {
       this.messageService.add({severity: 'error', summary: 'Error!', detail: error.message})

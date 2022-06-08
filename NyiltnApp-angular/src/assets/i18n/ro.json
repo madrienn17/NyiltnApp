@@ -1,4 +1,7 @@
 ﻿{
+  "Welcome": "Bun venit",
+  "Started": "Pentru a continua, este nevoie să vă autentificați",
+
   "English": "Engleză",
   "Romanian": "Română",
   "Hungarian": "Maghiară",
@@ -80,5 +83,12 @@
 
   "Register to event": "Înregistrare la un eveniment",
   "School": "Școală",
-  "Select the school": "Selectează școala"
+  "Select the school": "Selectează școala",
+
+  "Reset password": "Resetare parolă",
+  "PasswordMessage": "Dorești să-și schimbi parola? Linkul prin care poți face asta, îl găsești pe adresa de e-mail precizată.",
+  "InvalidToken": "Tokenul nu este valid! Dacă doriți să vă schimbați parola, generați unul nou!",
+  "Submit": "Confirmă"
+
+
 }

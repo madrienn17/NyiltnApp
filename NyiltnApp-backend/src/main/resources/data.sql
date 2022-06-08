@@ -2,6 +2,10 @@
 INSERT INTO nyiltnapp.public.users(id, email, first_name, last_name, mobile_number, password, role, token, username)
 VALUES (nextval('users_seq'), 'moldovan.adrienn@student.ms.sapientia.ro', 'Moldovan', 'Adrienn', '0744207361', 'adrienn',
         'ADMIN', '', 'adrienn');
+-- OTHER USER
+INSERT INTO nyiltnapp.public.users(id, email, first_name, last_name, mobile_number, password, role, token, username)
+VALUES (nextval('users_seq'), 'kisspista@gmail.com', 'Kiss', 'Pista', '0744552211', 'kisspista',
+        'USER', '', 'kisspista');
 
 -- LOCATION
 INSERT INTO nyiltnapp.public.locations(id, city_name, classroom, lat, lng, street_name, street_number) VALUES

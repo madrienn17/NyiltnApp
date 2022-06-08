@@ -72,5 +72,35 @@
     <div class="alert alert-success" *ngIf="isLoggedIn">
       {{ 'Logged in as ' | translate : { roles: roles } }}.
     </div>
+      <button class="p-button-text p-button-raised p-button-secondary"
+      (click)="showPasswordMessage()">
+        Forgot your password?
+      </button>
   </div>
 </div>
+
+
+<p-dialog [(visible)]="passwordDialog" [style]="{width: '300px'}" header="{{ 'Reset password' | translate }}"
+  [modal]="true"
+  styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="p-field">
+      <label>{{ 'PasswordMessage' | translate}}</label>
+    </div>
+    <label for="email" translate>Email</label>
+    <input
+      id="email"
+      type="text"
+      class="form-control"
+      name="email"
+      [(ngModel)]="email"
+      required
+    />
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="{{ 'Cancel' | translate }}" icon="pi pi-times" class="p-button-text"
+            (click)="closePasswordDialog()"></button>
+    <button pButton pRipple label="{{ 'Yes' | translate }}" icon="pi pi-check" class="p-button-text"
+            (click)="onResetPassword()"></button>
+  </ng-template>
+</p-dialog>

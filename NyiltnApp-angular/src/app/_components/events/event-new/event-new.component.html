@@ -1,6 +1,6 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <p-toast></p-toast>
-<div>
+<div class="container">
   <form name="addEventForm"
         #f="ngForm"
         class="row g-3"
@@ -48,7 +48,7 @@
       <label class="control-label" for="link" translate>Meet link</label>
       <input id="link" type="text" pInputText name="link"
              class="form-control"
-             required (change)="isDirty=true"
+             (change)="isDirty=true"
              [(ngModel)]="addEventForm.link">
     </div>
     <div class="col-md-12">

@@ -13,6 +13,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -54,16 +56,13 @@ public class NyiltnAppBackendApplication {
             http.csrf().disable()
                     .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/api/users/register", "/api/users/login").permitAll()
-//                    .anyRequest().authenticated();
-                    .anyRequest().permitAll();
-//            http.csrf().and().cors().disable()
-//                    .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
-//                    .authorizeRequests()
-//                    .antMatchers(HttpMethod.POST, "/api/register", "/api/login").permitAll()
-//                    .anyRequest().authenticated();
-//                    .disable();
-//                    .anyRequest().permitAll();
+                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                    .antMatchers(HttpMethod.POST, "/", "/api/user/auth/register",
+                            "/api/user/auth/login",
+                            "/api/user/*Password")
+                    .permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/user/*Password").permitAll()
+                    .anyRequest().authenticated();
         }
 
         @Bean

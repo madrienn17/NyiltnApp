@@ -5,7 +5,7 @@
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="home" translate>Home</a>
       </li>
-      <li>
+      <li *ngIf="isLoggedIn">
         <a href="/event-list" class="nav-link" routerLink="event-list" translate>Events</a>
       </li>
     </ul>
@@ -35,7 +35,5 @@
       </li>
     </ul>
   </nav>
-  <div class="container">
     <router-outlet></router-outlet>
-  </div>
 </div>

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import com.edu.nyiltnappbackend.model.UserBE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -26,7 +27,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 @Service("EmailService")
-@Profile("dev")
+@Profile({"dev", "test"})
 public class EmailServiceImpl implements EmailService {
     private static final String NOREPLY_ADDRESS = "noreply@ms.sapientia.ro";
 
@@ -134,4 +135,18 @@ public class EmailServiceImpl implements EmailService {
         emailSender.send(message);
     }
 
+    public void constructResetTokenEmail(String token, UserBE user) {
+        String url = "localhost:4200/changePassword" + "?token=" + token;
+        String message = "Hi, you requested a password reset, please follow the link below.";
+        sendPwdResetEmail(message + " \r\n" + url, user);
+    }
+
+    private void sendPwdResetEmail(String body, UserBE user) {
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setSubject("Reset Password");
+        email.setText(body);
+        email.setTo(user.getEmail());
+        email.setFrom(NOREPLY_ADDRESS);
+        emailSender.send(email);
+    }
 }

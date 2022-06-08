@@ -1,6 +1,8 @@
 package com.edu.nyiltnappbackend.security;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +31,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         try {
             if (checkJWTToken(request, response)) {
                 Claims claims = validateToken(request);
-                if (claims.get("authorities") != null) {
+                if (claims.get("sub") != null) {
                     setUpSpringAuthentication(claims);
                 } else {
                     SecurityContextHolder.clearContext();
@@ -55,10 +57,10 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
      */
     private void setUpSpringAuthentication(Claims claims) {
         @SuppressWarnings("unchecked")
-        List<String> authorities = (List<String>) claims.get("authorities");
+        String authorities = (String) claims.get("sub");
 
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(claims.getSubject(), null,
-                authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+                new ArrayList<>(Collections.singleton(new SimpleGrantedAuthority(authorities))));
         SecurityContextHolder.getContext().setAuthentication(auth);
 
     }

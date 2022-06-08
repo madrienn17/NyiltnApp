@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./_components/home/home.component";
 import {LoginComponent} from "./_components/login/login.component";
 import {RegisterComponent} from "./_components/register/register.component";
+import {ResetPasswordComponent} from "./_components/reset-password/reset-password.component";
 import {EventListComponent} from "./_components/events/event-list/event-list.component";
 import {EventNewComponent} from "./_components/events/event-new/event-new.component";
 import {RegistrationComponent} from "./_components/events/registration/registration.component";
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'event-new/:id', component: EventNewComponent, canDeactivate: [DirtyCheckGuard]},
   { path: 'event-details/:id', component: EventDetailsComponent },
   { path: 'registration/:id', component: RegistrationComponent },
-  { path: 'registrationlist/:id', component: RegistrationListComponent},
+  { path: 'registrationlist/:id', component: RegistrationListComponent },
+  { path: 'changePassword', component: ResetPasswordComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

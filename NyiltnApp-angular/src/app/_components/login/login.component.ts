@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string = '';
 
+  passwordDialog = false;
+  email: string = '';
+
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
@@ -50,5 +53,22 @@ export class LoginComponent implements OnInit {
 
   reloadPage(): void {
     window.location.reload();
+  }
+
+  showPasswordMessage() {
+    this.passwordDialog = true;
+  }
+
+  closePasswordDialog() {
+    this.passwordDialog = false;
+  }
+
+  onResetPassword() {
+    this.authService.resetPassword(this.email).subscribe((data: any) => {
+      console.log(data)
+      if (data.success) {
+        //show message
+      }
+    });
   }
 }

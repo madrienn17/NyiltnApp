@@ -1,6 +1,6 @@
-<h1>Welcome!<br/>This is the home page<br/>Please log in to access other menus</h1>
-<img
-  id="kitty-img"
-  src="https://media.istockphoto.com/vectors/cats-fat-cute-minimalistic-with-different-emotions-vector-id1336190495?b=1&k=20&m=1336190495&s=170667a&w=0&h=eyNP7LjQx_Nz08FuYlCBZYZwTl3JKo5VSnIu5jgAovI="
-  class="profile-img-card"
-/>
+<body>
+<div style="background-color: #2E8B57	">
+  <h1>{{ welcomeText }} {{ username }}!</h1>
+  <h2 *ngIf="!isLoggedIn()"> {{ started }}</h2>
+</div>
+</body>

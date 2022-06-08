@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../../../_services/user.service";
 import {EventService} from "../../../_services/event.service";
 import {User} from "../../../_models/User";
 import {Event} from "../../../_models/event";
@@ -18,7 +17,6 @@ export class EventNewComponent implements OnInit, ComponentCanDeactivate {
   isDirty: boolean = false
 
   constructor(private router: Router,
-              private userService: UserService,
               private eventService: EventService,
               private messageService: MessageService,
               private activatedRoute:ActivatedRoute,
