@@ -42,6 +42,7 @@ import { EventEditComponent } from './_components/events/event-edit/event-edit.c
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { ResetPasswordComponent } from './_components/reset-password/reset-password.component';
+import { StatisticsComponent } from './_components/statistics/statistics.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -59,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventNewComponent,
     EventDetailsComponent,
     EventEditComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    StatisticsComponent
   ],
     imports: [
         BrowserModule,

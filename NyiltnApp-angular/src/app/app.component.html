@@ -3,10 +3,13 @@
     <a href="#" class="navbar-brand">NyiltnApp</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home" translate>Home</a>
+        <a href="/home" class="nav-link" routerLink="home" translate><i class="pi pi-home"></i> Home</a>
       </li>
       <li *ngIf="isLoggedIn">
-        <a href="/event-list" class="nav-link" routerLink="event-list" translate>Events</a>
+        <a href="/event-list" class="nav-link" routerLink="event-list" translate><i class="pi pi-list"></i> Events</a>
+      </li>
+      <li *ngIf="isLoggedIn && isAdmin">
+        <a href="/statistics" class="nav-link" routerLink="statistics" translate><i class="pi pi-chart-bar"></i> Statistics</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
@@ -17,10 +20,10 @@
         </button>
       </li>
       <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register" translate>Register</a>
+        <a href="/register" class="nav-link" routerLink="register" translate><i class="pi pi-user-plus"></i> Register</a>
       </li>
       <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login" translate>Login</a>
+        <a href="/login" class="nav-link" routerLink="login" translate> <i class="pi pi-sign-in"></i>Login</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
@@ -31,7 +34,7 @@
         </button>
       </li>
       <li class="nav-item">
-        <a href class="nav-link" (click)="logout()" translate>LogOut</a>
+        <a href class="nav-link" (click)="logout()" translate>LogOut <i class="pi pi-sign-out"></i></a>
       </li>
     </ul>
   </nav>

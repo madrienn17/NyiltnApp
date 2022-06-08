@@ -8,6 +8,7 @@
 
   "Home": "Acasă",
   "Events": "Evenimente",
+  "Statistics": "Statistici",
   "Login": "Autentificare",
   "Register": "Înregistrare",
   "LogOut": "Deconectare",
@@ -85,7 +86,8 @@
   "School": "Școală",
   "Select the school": "Selectează școala",
 
-  "Reset password": "Resetare parolă",
+  "Forgot your password?": "Ai uitat parola?",
+  "Reset password": "Updatare",
   "PasswordMessage": "Dorești să-și schimbi parola? Linkul prin care poți face asta, îl găsești pe adresa de e-mail precizată.",
   "InvalidToken": "Tokenul nu este valid! Dacă doriți să vă schimbați parola, generați unul nou!",
   "Submit": "Confirmă"

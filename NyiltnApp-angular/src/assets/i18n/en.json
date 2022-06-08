@@ -8,6 +8,7 @@
 
   "Home": "Home",
   "Events": "Events",
+  "Statistics": "Statistics",
   "Login": "Login",
   "Register": "Register",
   "LogOut": "LogOut",
@@ -85,7 +86,7 @@
   "School": "School",
   "Select the school": "Select the school",
 
-
+  "Forgot your password?": "Forgot your password?",
   "Reset password": "Reset password",
   "PasswordMessage": "Do you want to reset your password? A link which authorizes you to this action\n will be sent on your email address.",
   "InvalidToken": "Your token is not valid! If you want to reset your password please request a new one!",

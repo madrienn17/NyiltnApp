@@ -11,6 +11,7 @@ import {RegistrationListComponent} from "./_components/events/registration-list/
 import {EventDetailsComponent} from "./_components/events/event-details/event-details.component";
 import {EventEditComponent} from "./_components/events/event-edit/event-edit.component";
 import {DirtyCheckGuard} from "./_helpers/dirty-check.guard";
+import {StatisticsComponent} from "./_components/statistics/statistics.component";
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'registration/:id', component: RegistrationComponent },
   { path: 'registrationlist/:id', component: RegistrationListComponent },
   { path: 'changePassword', component: ResetPasswordComponent },
+  { path: 'statistics', component: StatisticsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

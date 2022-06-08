@@ -45,7 +45,6 @@ public class UserBE {
     private String username;
 
     @ToString.Exclude
-    @Min(6)
     private String password;
 
     @Column(columnDefinition = "varchar(255) default 'USER' ")
