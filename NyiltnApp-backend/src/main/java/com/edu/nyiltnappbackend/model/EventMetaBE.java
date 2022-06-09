@@ -1,6 +1,7 @@
 package com.edu.nyiltnappbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.util.TextBuffer;
 import lombok.*;
 import org.w3c.dom.Text;
@@ -13,9 +14,9 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "event_meta")
 @Data
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonPropertyOrder({ "name", "description" })
 public class EventMetaBE {
 
     @Id

@@ -51,6 +51,7 @@ public class DTOConverters {
                 .lngCoord(locationDTO.getLngCoord())
                 .streetName(locationDTO.getStreetName())
                 .streetNumber(locationDTO.getStreetNumber())
+                .classroom(locationDTO.getClassroom())
                 .build();
     }
 
@@ -62,6 +63,7 @@ public class DTOConverters {
                 .cityName(locationBE.getCityName())
                 .latCoord(locationBE.getLatCoord())
                 .lngCoord(locationBE.getLngCoord())
+                .classroom(locationBE.getClassroom())
                 .streetName(locationBE.getStreetName())
                 .streetNumber(locationBE.getStreetNumber())
                 .build();
@@ -109,16 +111,20 @@ public class DTOConverters {
         return SchoolDTO.builder()
                 .countyCode(schoolBE.getCountyCode())
                 .schoolName(schoolBE.getSchoolName())
-                .shortName(schoolBE.getShortName())
                 .build();
     }
 
-    public static SchoolBE convertDTOToSchoolBE(SchoolDTO schoolDTO) {
+    public static SchoolBE convertSchoolDTOToBE(SchoolDTO schoolDTO) {
         return SchoolBE.builder()
                 .countyCode(schoolDTO.getCountyCode())
                 .schoolName(schoolDTO.getSchoolName())
-                .shortName(schoolDTO.getShortName())
                 .build();
+    }
+
+    public static List<SchoolBE> convertSchoolDTOListToBE(List<SchoolDTO> schoolDTOList) {
+        return schoolDTOList
+                .stream().map(DTOConverters::convertSchoolDTOToBE)
+                .collect(Collectors.toList());
     }
 
     /**

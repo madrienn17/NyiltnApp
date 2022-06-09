@@ -26,7 +26,7 @@ public class EventBE {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private EventMetaBE eventMeta;
 
     @ManyToOne

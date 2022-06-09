@@ -31,7 +31,4 @@ public class SchoolBE {
 
     @Column(name = "name")
     private String schoolName;
-
-    @Column(name = "short_name")
-    private String shortName;
 }

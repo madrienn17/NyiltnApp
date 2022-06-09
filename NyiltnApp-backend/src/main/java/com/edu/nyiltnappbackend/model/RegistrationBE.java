@@ -41,7 +41,7 @@ public class RegistrationBE {
     @ManyToOne
     private SchoolBE school;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private EventBE event;
 
 }
