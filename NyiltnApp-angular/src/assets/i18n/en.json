@@ -90,6 +90,8 @@
   "Reset password": "Reset password",
   "PasswordMessage": "Do you want to reset your password? A link which authorizes you to this action\n will be sent on your email address.",
   "InvalidToken": "Your token is not valid! If you want to reset your password please request a new one!",
-  "Submit": "Confirm"
+  "Submit": "Confirm",
+
+  "registeredByCounty": "Nr of people registered by county"
 
 }

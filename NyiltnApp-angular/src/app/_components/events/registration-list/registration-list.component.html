@@ -1,6 +1,7 @@
 <p-toast position="top-right"></p-toast>
 <div class="container">
-<p-table [columns]="cols" [value]="registrations">
+<p-table [columns]="cols" [value]="registrations" [rows]="5" [paginator]="true"
+         [rowHover]="true" [autoLayout]="true" [responsive]="true">
   <ng-template pTemplate="caption">
     Registrations List
   </ng-template>

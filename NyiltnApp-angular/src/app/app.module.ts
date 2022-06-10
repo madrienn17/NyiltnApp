@@ -43,6 +43,8 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { ResetPasswordComponent } from './_components/reset-password/reset-password.component';
 import { StatisticsComponent } from './_components/statistics/statistics.component';
+import {PaginatorModule} from "primeng/paginator";
+import {ChartModule} from "primeng/chart";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -63,45 +65,47 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResetPasswordComponent,
     StatisticsComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule,
-        DropdownModule,
-        VirtualScrollerModule,
-        BrowserAnimationsModule,
-        TreeTableModule,
-        InputTextModule,
-        TableModule,
-        MultiSelectModule,
-        FormsModule,
-        DropdownModule,
-        ButtonModule,
-        RippleModule,
-        DialogModule,
-        ToolbarModule,
-        AutoCompleteModule,
-        CalendarModule,
-        ToastModule,
-        ReactiveFormsModule,
-        InputTextareaModule,
-        MessageModule,
-        MessagesModule,
-        FileUploadModule,
-        TooltipModule,
-        ConfirmDialogModule,
-        MenuModule,
-        PanelModule,
-        TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-          }
-        }),
-        CardModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    DropdownModule,
+    VirtualScrollerModule,
+    BrowserAnimationsModule,
+    TreeTableModule,
+    InputTextModule,
+    TableModule,
+    MultiSelectModule,
+    FormsModule,
+    DropdownModule,
+    ButtonModule,
+    RippleModule,
+    DialogModule,
+    ToolbarModule,
+    AutoCompleteModule,
+    CalendarModule,
+    ToastModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    MessageModule,
+    MessagesModule,
+    FileUploadModule,
+    TooltipModule,
+    ConfirmDialogModule,
+    MenuModule,
+    PanelModule,
+    PaginatorModule,
+    ChartModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    CardModule,
+  ],
   providers: [
     authInterceptorProviders,
     MessageService,

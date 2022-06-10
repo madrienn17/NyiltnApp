@@ -22,6 +22,9 @@ public class RegistrationController {
     @Autowired
     private SchoolService schoolService;
 
+    @Autowired
+    private EventService eventService;
+
     @PostMapping("")
     public MyResponseEntity<?> add(@RequestBody RegistrationDTO registrationDTO) {
         try {
@@ -63,4 +66,18 @@ public class RegistrationController {
         }
     }
 
+    @GetMapping("/getNrByCounty")
+    public MyResponseEntity<?> getRegistrationNrByCounty() {
+        return buildSuccessMessage(registrationService.getRegisteredNrByCounty());
+    }
+
+    @GetMapping("/getNrBySchool")
+    public MyResponseEntity<?> getRegistrationNrBySchool() {
+        return buildSuccessMessage(registrationService.getRegisteredBySchool());
+    }
+
+    @GetMapping("/getTopEvents")
+    public MyResponseEntity<?> getTopEvents() {
+        return buildSuccessMessage(eventService.findTopEvents());
+    }
 }

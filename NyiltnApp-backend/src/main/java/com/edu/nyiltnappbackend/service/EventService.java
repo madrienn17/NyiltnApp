@@ -5,9 +5,11 @@ import com.edu.nyiltnappbackend.helper.ServiceException;
 import com.edu.nyiltnappbackend.mail.EmailServiceImpl;
 import com.edu.nyiltnappbackend.model.EventBE;
 import com.edu.nyiltnappbackend.model.EventMetaBE;
+import com.edu.nyiltnappbackend.model.SchoolBE;
 import com.edu.nyiltnappbackend.model.UserBE;
 import com.edu.nyiltnappbackend.model.dto.EventDTO;
 import com.edu.nyiltnappbackend.model.dto.EventMainDTO;
+import com.edu.nyiltnappbackend.model.dto.SelectItemDTO;
 import com.edu.nyiltnappbackend.repository.IEventMetaRepository;
 import com.edu.nyiltnappbackend.repository.IEventRepository;
 import com.edu.nyiltnappbackend.repository.IRegistrationRepository;
@@ -16,9 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -52,12 +53,12 @@ public class EventService {
 
         events.forEach(e -> {
             eventMainDTOS.add(EventMainDTO.builder()
-                            .id(e.getId())
-                            .name(e.getName())
-                            .description(e.getDescription())
-                            .eventList(DTOConverters.convertEventListToDTO(
-                                    eventRepository.findByEventMeta_Id(e.getId())))
-                            .build());
+                    .id(e.getId())
+                    .name(e.getName())
+                    .description(e.getDescription())
+                    .eventList(DTOConverters.convertEventListToDTO(
+                            eventRepository.findByEventMeta_Id(e.getId())))
+                    .build());
         });
         return eventMainDTOS;
     }
@@ -209,4 +210,21 @@ public class EventService {
         return this.eventMetaRepository.save(metaToSave);
     }
 
+    public List<SelectItemDTO> findTopEvents() {
+        List<SelectItemDTO> topEvents = new ArrayList<>();
+
+        var tops = eventRepository.findAllByOrderByMaxAttendeeNrDesc();
+        tops
+            .forEach(e -> {
+                topEvents.add(
+                        SelectItemDTO
+                                .builder()
+                                .label(e.getEventMeta().getName())
+                                .value(String.valueOf(e.getRegisteredNr()))
+                                .build());
+
+            });
+
+        return topEvents;
+    }
 }

@@ -90,7 +90,8 @@
   "Reset password": "Updatare",
   "PasswordMessage": "Dorești să-și schimbi parola? Linkul prin care poți face asta, îl găsești pe adresa de e-mail precizată.",
   "InvalidToken": "Tokenul nu este valid! Dacă doriți să vă schimbați parola, generați unul nou!",
-  "Submit": "Confirmă"
+  "Submit": "Confirmă",
 
+  "registeredByCounty": "Numărul persoanelor înregistrate pe județe"
 
 }

@@ -12,4 +12,5 @@ import java.util.Set;
 public interface IEventRepository extends JpaRepository<EventBE, Long> {
     List<EventBE> findByEventMeta_Id(Long id);
     Optional<EventBE> findEventBEById(Long id);
+    List<EventBE> findAllByOrderByMaxAttendeeNrDesc();
 }

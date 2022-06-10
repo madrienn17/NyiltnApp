@@ -8,6 +8,7 @@ import com.edu.nyiltnappbackend.model.RegistrationBE;
 import com.edu.nyiltnappbackend.model.SchoolBE;
 import com.edu.nyiltnappbackend.model.UserBE;
 import com.edu.nyiltnappbackend.model.dto.RegistrationDTO;
+import com.edu.nyiltnappbackend.model.dto.SelectItemDTO;
 import com.edu.nyiltnappbackend.repository.IEventRepository;
 import com.edu.nyiltnappbackend.repository.IRegistrationRepository;
 import com.edu.nyiltnappbackend.repository.ISchoolRepository;
@@ -18,9 +19,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class RegistrationService {
@@ -81,7 +81,7 @@ public class RegistrationService {
                         "Thank you for deciding to participate on our " + event.getEventMeta().getName() +
                         " event!\n See the event's details below:\n" + event);
 
-        return  DTOConverters.convertRegistrationBEToDTO(registrationRepository.save(registrationToSave));
+        return DTOConverters.convertRegistrationBEToDTO(registrationRepository.save(registrationToSave));
     }
 
     public void remove(Long eventId, String username) throws ServiceException {
@@ -119,5 +119,48 @@ public class RegistrationService {
     public List<Long> getAllRegisteredEventIdsForUser(String username) {
         Optional<List<Long>> eventIds = registrationRepository.getEventIdsByUsername(username);
         return eventIds.orElseGet(ArrayList::new);
+    }
+
+    public Set<SelectItemDTO> getRegisteredNrByCounty() {
+        Set<SelectItemDTO> registeredByCountyDTOS = new HashSet<>();
+
+        var countyCodes = schoolRepository.findAll()
+                .stream()
+                .map(SchoolBE::getCountyCode)
+                .collect(Collectors.toList());
+        countyCodes
+                .forEach(county -> {
+                    if (!county.isEmpty()) {
+                        registeredByCountyDTOS.add(
+                                SelectItemDTO
+                                        .builder()
+                                        .label(String.valueOf(registrationRepository.countBySchool_CountyCode(county)))
+                                        .value(county)
+                                        .build());
+                    }
+                });
+
+        return registeredByCountyDTOS;
+    }
+
+    public List<SelectItemDTO> getRegisteredBySchool() {
+        List<SelectItemDTO> registeredBySchool = new ArrayList<>();
+
+        var schoolNames = schoolRepository.findAll()
+                .stream()
+                .map(SchoolBE::getSchoolName)
+                .collect(Collectors.toList());
+
+        schoolNames
+                .forEach(school ->
+                        registeredBySchool.add(
+                                SelectItemDTO
+                                        .builder()
+                                        .label(school)
+                                        .value(String.valueOf(registrationRepository.countBySchool_SchoolName(school)))
+                                        .build()
+                        ));
+
+        return registeredBySchool;
     }
 }

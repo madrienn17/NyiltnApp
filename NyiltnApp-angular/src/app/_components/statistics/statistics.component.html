@@ -1,1 +1,16 @@
-<p>statistics works!</p>
+<div class="flex-container">
+
+<div  class="flex-child left">
+  <p-chart type="pie" [data]="data1" [options]="chartOptions" [style]="{'height': '370px', 'width': '100%', 'margin': 'auto', 'padding-top': '50px'}"></p-chart>
+  <h3>{{ 'registeredByCounty' | translate }}</h3>
+</div>
+  <div class="flex-child right">
+    <p-chart type="pie" [data]="data3" [options]="chartOptions" [style]="{'height': '370px', 'width': '100%', 'margin': 'auto', 'padding-top': '50px'}"></p-chart>
+    <h3>A legnépszerűbb események</h3>
+  </div>
+</div>
+<div class="flex-container">
+
+  <p-chart type="bar" [data]="data2" [options]="chartOptions" [style]="{'height': '1000px', 'width': '100%', 'margin': 'auto', 'padding-top': '50px'}"></p-chart>
+
+</div>

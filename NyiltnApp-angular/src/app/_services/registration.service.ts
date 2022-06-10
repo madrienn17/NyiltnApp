@@ -44,4 +44,16 @@ export class RegistrationService {
   removeRegistration(id: number, username: string) {
     return this.http.delete(baseUrl + "/" + id + "/" + username);
   }
+
+  getNrByCounty() {
+    return this.http.get(baseUrl + '/getNrByCounty' );
+  }
+
+  getNrBySchool() {
+    return this.http.get(baseUrl + '/getNrBySchool' );
+  }
+
+  getTopEvents() {
+    return this.http.get(baseUrl + '/getTopEvents');
+  }
 }

@@ -91,6 +91,9 @@
   "Reset password": "Jelszó csere",
   "PasswordMessage": "Frissíteni akarja jelszavát? A link amin keresztül ezt megteheti, el lesz küldve a megadott e-mail címre.",
   "InvalidToken": "A jelszó visszaállításához generált kódja nem érvényes, amennyiben meg szeretné változtatni jelszavát, generálja újra!",
-  "Submit": "Megerősít"
+  "Submit": "Megerősít",
+
+  "registeredByCounty": "Regisztrált személyek megyénként"
+
 
 }
