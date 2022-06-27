@@ -7,12 +7,10 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.sql.Timestamp;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
 @Table(name = "events")
 @Data
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -21,7 +19,6 @@ public class EventBE {
     @JsonIgnore
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "events_gen")
     @SequenceGenerator(name = "events_gen", sequenceName = "events_seq", allocationSize = 1)
-    @ToString.Exclude
     @EqualsAndHashCode.Include
     @Column(name = "id")
     private Long id;

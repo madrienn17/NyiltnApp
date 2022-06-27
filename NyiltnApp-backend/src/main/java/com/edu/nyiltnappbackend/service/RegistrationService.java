@@ -121,21 +121,22 @@ public class RegistrationService {
         return eventIds.orElseGet(ArrayList::new);
     }
 
-    public Set<SelectItemDTO> getRegisteredNrByCounty() {
-        Set<SelectItemDTO> registeredByCountyDTOS = new HashSet<>();
+    public List<SelectItemDTO> getRegisteredNrByCounty() {
+        List<SelectItemDTO> registeredByCountyDTOS = new ArrayList<>();
 
         var countyCodes = schoolRepository.findAll()
                 .stream()
                 .map(SchoolBE::getCountyCode)
                 .collect(Collectors.toList());
-        countyCodes
+        var array = countyCodes.stream().distinct().collect(Collectors.toList());
+        array
                 .forEach(county -> {
                     if (!county.isEmpty()) {
                         registeredByCountyDTOS.add(
                                 SelectItemDTO
                                         .builder()
-                                        .label(String.valueOf(registrationRepository.countBySchool_CountyCode(county)))
-                                        .value(county)
+                                        .label(county)
+                                        .value(String.valueOf(registrationRepository.countBySchool_CountyCode(county)))
                                         .build());
                     }
                 });

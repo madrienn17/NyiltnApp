@@ -3,6 +3,7 @@ import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Registration} from "../../../_models/registration";
 import {RegistrationService} from "../../../_services/registration.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-registration',
@@ -22,6 +23,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private registrationService: RegistrationService,
               private messageService: MessageService,
               private activatedRoute:ActivatedRoute,
+              private translate: TranslateService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class RegistrationComponent implements OnInit {
       if (!response.success) {
         this.messageService.add({severity: 'error', summary: 'Error!', detail: response.message})
       } else {
-        this.messageService.add({severity: 'success', summary: 'Success!', detail: "Registration successfully sent"})
+        this.messageService.add({severity: 'success', summary: 'Success!', detail: this.translate.instant('Registration-success')})
         this.router.navigate(['event-list'])
       }
     }, error => {

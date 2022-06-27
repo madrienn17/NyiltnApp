@@ -6,6 +6,7 @@ import {EventMeta} from "../../../_models/event-meta";
 import {EventService} from "../../../_services/event.service";
 import {RegistrationService} from "../../../_services/registration.service";
 import {TokenStorageService} from "../../../_services/token-storage.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-event-list',
@@ -45,6 +46,7 @@ export class EventListComponent implements OnInit {
               private registrationService: RegistrationService,
               private tokenStorageService: TokenStorageService,
               private router: Router,
+              private translate: TranslateService,
               private messageService: MessageService) { }
 
   ngOnInit(): void {
@@ -98,7 +100,7 @@ export class EventListComponent implements OnInit {
     this.eventService.saveMeta(this.addEventMetaForm).subscribe((resp:any) => {
       console.log(resp)
       if (resp.success) {
-        this.messageService.add({severity: 'success', summary: 'Success!', detail: "Event-meta successfully added"})
+        this.messageService.add({severity: 'success', summary: 'Success!', detail: this.translate.instant('Meta-save')})
         this.closeAddEventMeta()
       }
     }, error => {
@@ -109,7 +111,7 @@ export class EventListComponent implements OnInit {
   onDeleteEventButton() {
     this.eventService.deleteEvent(this.eventIdToDelete).subscribe((response: any) => {
       if (response.success) {
-        this.messageService.add({severity: 'success', summary: 'Success', detail: "Event successfully deleted!"})
+        this.messageService.add({severity: 'success', summary: 'Success', detail: this.translate.instant('Delete-event')})
         this.closeDeleteEvent();
       } else {
         this.messageService.add({severity: 'error', summary: 'Error', detail: "Event was not deleted!"})

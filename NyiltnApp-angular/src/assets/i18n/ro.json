@@ -49,12 +49,14 @@
   "New event-meta": "Eveniment nou",
   "Cancel": "Anulare",
   "Save": "Salvare",
+  "Meta-save": "Event-meta adăugat cu succes",
 
   "Edit event-meta": "Editare eveniment",
 
   "Delete event": "Șterge eveniment",
   "Are you sure you want to delete this event? The action can't be reverted." : "Ești sigur că vrei să ștergi acest eveniment? Acțiunea nu va putea fi revocată ulterior.",
   "Yes": "Da",
+  "Delete-event": "Eveniment șters cu succes!",
 
   "Delete event meta": "Șterge meta-eveniment",
   "Are you sure you want to delete this object? Every event related to it, will be deleted!": "Ești sigur că vrei să ștergi acest obiect? Toate evenimentele în relație cu el se vor șterge.",
@@ -85,6 +87,7 @@
   "Register to event": "Înregistrare la un eveniment",
   "School": "Școală",
   "Select the school": "Selectează școala",
+  "Registration-success": "Înregistrare cu succes",
 
   "Forgot your password?": "Ai uitat parola?",
   "Reset password": "Updatare",

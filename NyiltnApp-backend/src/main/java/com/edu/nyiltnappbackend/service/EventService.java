@@ -5,7 +5,6 @@ import com.edu.nyiltnappbackend.helper.ServiceException;
 import com.edu.nyiltnappbackend.mail.EmailServiceImpl;
 import com.edu.nyiltnappbackend.model.EventBE;
 import com.edu.nyiltnappbackend.model.EventMetaBE;
-import com.edu.nyiltnappbackend.model.SchoolBE;
 import com.edu.nyiltnappbackend.model.UserBE;
 import com.edu.nyiltnappbackend.model.dto.EventDTO;
 import com.edu.nyiltnappbackend.model.dto.EventMainDTO;
@@ -15,11 +14,13 @@ import com.edu.nyiltnappbackend.repository.IEventRepository;
 import com.edu.nyiltnappbackend.repository.IRegistrationRepository;
 import com.edu.nyiltnappbackend.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventService {
@@ -98,11 +99,16 @@ public class EventService {
         if (eventOpt.get().getRegisteredNr() > 0) {
             var registrationList = registrationRepository.findByEvent_Id(eventOpt.get().getId());
             registrationList.forEach(registration -> {
-                emailService.sendSimpleMessage(registration.getRegisteredUser().getEmail(), "Event Deleted",
-                        "We are sorry to announce you, that the event you were registered to," +
-                                " was deleted by an admin.\n Look around for other interesting events!\n" +
-                                "The deleted event is: " + eventOpt.get());
-                registrationRepository.delete(registration);
+                try {
+                    emailService.sendSimpleMessage(registration.getRegisteredUser().getEmail(), "Event Deleted",
+                            "We are sorry to announce you, that the event you were registered to," +
+                                    " was deleted by an admin.\n Look around for other interesting events!\n" +
+                                    "The deleted event is: " + eventOpt.get());
+                    registrationRepository.delete(registration);
+                } catch (MailException e) {
+                    e.printStackTrace();
+                }
+
             });
         }
 

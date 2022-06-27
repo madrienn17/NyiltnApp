@@ -1,6 +1,7 @@
 package com.edu.nyiltnappbackend.mail;
 
 import freemarker.template.TemplateException;
+import org.springframework.mail.MailException;
 
 import javax.mail.MessagingException;
 import java.io.IOException;

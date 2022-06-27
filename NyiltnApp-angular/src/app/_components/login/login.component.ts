@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../_services/auth.service";
 import {TokenStorageService} from "../../_services/token-storage.service";
+import {MessageService} from "primeng/api";
 
 
 @Component({
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit {
   passwordDialog = false;
   email: string = '';
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService,
+              private tokenStorage: TokenStorageService,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -37,12 +40,18 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe(
       data => {
         console.log(data);
-        this.tokenStorage.saveToken(data.data.token);
-        this.tokenStorage.saveUser(data.data);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().role;
-        this.reloadPage();
+
+        if (data.success) {
+          this.tokenStorage.saveToken(data.data.token);
+          this.tokenStorage.saveUser(data.data);
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.roles = this.tokenStorage.getUser().role;
+          this.reloadPage();
+        } else {
+          this.messageService.add({severity: 'error', summary: 'Error!', detail: data.message})
+        }
+
       },
       err => {
         this.errorMessage = err.error.message;

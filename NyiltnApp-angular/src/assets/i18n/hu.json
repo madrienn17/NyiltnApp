@@ -47,15 +47,17 @@
   "Details": "Részletek",
   "There is no event added yet.": "Még nincs hozzáadva egyetlen esemény sem.",
 
-  "New event-meta": "Új esemény",
+  "New event-meta": "Új esemény-meta",
   "Cancel": "Mégsem",
   "Save": "Mentés",
+  "Meta-save": "Esemény-meta sikeresen hozzáadva",
 
   "Edit event-meta": "Esemény szerkesztése",
 
   "Delete event": "Esemény törlése",
   "Are you sure you want to delete this event? The action can't be reverted." : "Biztosan törölni szeretné ezt az eseményt? A műveletet nem fogja tudni visszavonni.",
   "Yes": "Igen",
+  "Delete-event": "Esemény sikeresen törölve!",
 
   "Delete event meta": "Esemény-meta törlése",
   "Are you sure you want to delete this object? Every event related to it, will be deleted!": "Biztosan törölni akarja ezt az objektumot? Minden hozzá kapcsolódó esemény törlésre kerül!",
@@ -86,6 +88,7 @@
   "Register to event": "Feliratkozás eseményre",
   "School": "Iskola",
   "Select the school": "Válassza ki az iskolát",
+  "Registration-success": "Sikeresen feliratkozott az eseményre",
 
   "Forgot your password?": "Elfelejtette jelszavát?",
   "Reset password": "Jelszó csere",

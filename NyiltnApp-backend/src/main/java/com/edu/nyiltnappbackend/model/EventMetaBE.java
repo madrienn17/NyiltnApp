@@ -2,14 +2,11 @@ package com.edu.nyiltnappbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.core.util.TextBuffer;
 import lombok.*;
-import org.w3c.dom.Text;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
 @Table(name = "event_meta")
 @Data
@@ -34,7 +31,7 @@ public class EventMetaBE {
     private String name;
 
     @NotBlank
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Override

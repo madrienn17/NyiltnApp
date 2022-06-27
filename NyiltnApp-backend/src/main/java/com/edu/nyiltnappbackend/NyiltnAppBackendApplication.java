@@ -65,8 +65,8 @@ public class NyiltnAppBackendApplication {
             mailSender.setHost("smtp.gmail.com");
             mailSender.setPort(587);
 
-            mailSender.setUsername("kalanyosherripotter@gmail.com");
-            mailSender.setPassword("dpgqqjtmbfysiyqs");
+            mailSender.setUsername("moldovan.adrienn17@gmail.com");
+            mailSender.setPassword("tjtuyrglwjwjwtlo");
 
             Properties props = mailSender.getJavaMailProperties();
             props.put("mail.transport.protocol", "smtp");
